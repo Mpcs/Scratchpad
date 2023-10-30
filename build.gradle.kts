@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.Java
+
 plugins {
     id("java")
 }
@@ -12,9 +14,16 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    annotationProcessor(project(":Config"))
     implementation(project(":Config"))
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType<JavaCompile>(){
+    doFirst {
+        println("AnnotationProcessorPath for $name is ${options.annotationProcessorPath?.files}")
+    }
 }

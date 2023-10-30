@@ -6,6 +6,6 @@ import java.lang.annotation.*;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME) // compile time in prod
-public @interface AConfig {
+public @interface Config {
 	
 }
