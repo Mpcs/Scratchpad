@@ -12,6 +12,9 @@ repositories {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":Logging")))
+    implementation(project(mapOf("path" to ":Utility")))
+    implementation(project(mapOf("path" to ":Utility")))
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     annotationProcessor(project(":Config"))

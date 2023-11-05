@@ -1,20 +1,24 @@
 package com.mpcs.scratchpad;
 
 import com.mpcs.config.ConfigManager;
-import com.mpcs.config.ConfigVars;
 import com.mpcs.config.annotations.Config;
-
-import java.lang.reflect.Field;
+import com.mpcs.logging.Logger;
+import com.mpcs.util.PerformanceMonitor;
 
 public class Main {
 
     @Config
     public static int win_w = 100;
     @Config
-    public static int win_h = 200;
+    public static int win_h = 300;
+    @Config
+    public static int maya = 32;
     public static void main(String[] args) {
-        System.out.println(win_w);
+        PerformanceMonitor monitor = new PerformanceMonitor();
+        monitor.start();
         ConfigManager.init();
+        Logger.log("Config init took " + monitor.getTime() + " ms");
+        Logger.log(Integer.toString(win_w));
 
 /* System.out.println("SciPad is starting!");
         System.out.println(com.mpcs.config.Config.test);

@@ -4,24 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b81afd6a-dd54-47dd-9944-0771e0b00737" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Config/src/main/resources/META-INF/services/javax.annotation.processing.Processor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/src/main/java/com/mpcs/logging/Logger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="b81afd6a-dd54-47dd-9944-0771e0b00737" name="Changes" comment="Initial commit">
+      <change afterPath="$PROJECT_DIR$/Utility/src/main/java/com/mpcs/util/PerformanceMonitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Config/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/AConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/ConfigAnnotationProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/ConfigAnnotationProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/ConfigManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,23 +36,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Scratchpad" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Scratchpad" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Scratchpad" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -90,7 +69,11 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2XRAMJ7ICmGKt5ZigxXP8AxLw3R" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -102,12 +85,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Pliki/Hobby/Programowanie/Scratchpad/run&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/mpcs/Projects/Scratchpad/build.gradle.kts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
   <component name="RunManager" selected="Application.Scratchpad">
@@ -144,6 +128,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="Scratchpad [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -165,6 +150,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="Scratchpad [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -186,6 +172,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <list>
@@ -213,5 +200,9 @@
       <updated>1698581469733</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
 </project>

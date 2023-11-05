@@ -12,39 +12,48 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
 @SupportedAnnotationTypes("com.mpcs.config.annotations.Config")
-@SupportedSourceVersion(SourceVersion.RELEASE_17)
+@SupportedSourceVersion(SourceVersion.RELEASE_21)
 public class ConfigAnnotationProcessor extends AbstractProcessor {
 
     String fileContents1 = """
             package com.mpcs.config;
             
-            public class ConfigVars { 
-            public static final ConfigElement[] elements = {""";
+            import java.util.Map;
+            
+            public class ConfigVars {
+            public static final Map<String, ConfigElement> elements = Map.of(""";
 
     String fileContents2 = """
-            };
+            );
             }
             """;
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations,
       RoundEnvironment roundEnv) {
-        if (annotations.size() == 0) {
+        if (annotations.isEmpty()) {
             return false;
         }
-        String arrayContent = "";
+        StringBuilder arrayContent = new StringBuilder();
 
         for (TypeElement ann : annotations) {
             for (Element element : roundEnv.getElementsAnnotatedWith(ann)) {
                 System.out.println(element.getEnclosingElement().toString() + " |:| " + element.toString());
                 element.getModifiers().contains(Modifier.FINAL);
-                arrayContent += "new ConfigElement(\"" + element.getEnclosingElement().toString() + "\", \"" + element + "\"),";
+                arrayContent.append("\"")
+                        .append(element)
+                        .append("\", new ConfigElement(\"")
+                        .append(element.getEnclosingElement())
+                        .append("\", \"")
+                        .append(element)
+                        .append("\"),");
             }
         }
+        arrayContent.deleteCharAt(arrayContent.length()-1);
         try {
             FileObject file = processingEnv.getFiler().createSourceFile("com.mpcs.config.ConfigVars");
             Writer writer = file.openWriter();
-            writer.write(fileContents1 + arrayContent + fileContents2);
+            writer.write(fileContents1 + arrayContent.toString() + fileContents2);
             writer.close();
             int[] a = {1, 3};
         } catch (Exception e) {
