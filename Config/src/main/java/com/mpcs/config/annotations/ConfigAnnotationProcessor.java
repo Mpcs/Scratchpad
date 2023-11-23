@@ -12,7 +12,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 
 @SupportedAnnotationTypes("com.mpcs.config.annotations.Config")
-@SupportedSourceVersion(SourceVersion.RELEASE_21)
+@SupportedSourceVersion(SourceVersion.RELEASE_20)
 public class ConfigAnnotationProcessor extends AbstractProcessor {
 
     String fileContents1 = """

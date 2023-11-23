@@ -4,18 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b81afd6a-dd54-47dd-9944-0771e0b00737" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/Utility/src/main/java/com/mpcs/util/PerformanceMonitor.java" afterDir="false" />
+    <list default="true" id="d28cc064-d81a-434b-9f3f-496ade8443d4" name="Changes" comment="Fix gradle bugs, split into editor and engine">
+      <change afterPath="$PROJECT_DIR$/Config/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Editor/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/CodeEditor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EditorApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EngineCanvas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/ShaderEditorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Editor/src/main/resources/com/mpcs/scratchpad/editor/hello-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Utility/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Engine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/MyGLEventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/MyGLEventListenerEx1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/OneTri.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Config/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/ConfigAnnotationProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/ConfigAnnotationProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +46,9 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/Editor">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -46,6 +61,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -53,29 +69,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="8b236953-e21e-4b61-8a04-de7de5f15087" />
-        <option name="url" value="https://github.com/Mpcs/Scratchpad.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="2XRAMJ7ICmGKt5ZigxXP8AxLw3R" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2XrZVaq8xEW1mtGrjQcMlh1FRQW" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
@@ -84,21 +82,54 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/mpcs/Projects/Scratchpad/build.gradle.kts&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-20&quot;,
+    &quot;jdk.selected.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: &quot;corretto-20&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Pliki/Hobby/Programowanie/Scratchpad/Editor/src/main/resources/com/mpcs/scratchpad/editor&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.35299808&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;jdk.preference.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: [
+      &quot;20=C:/Users/Mpcs/.jdks/corretto-20.0.2.1&quot;
+    ]
   }
 }</component>
-  <component name="RunManager" selected="Application.Scratchpad">
-    <configuration name="Scratchpad" type="Application" factoryName="Application" temporary="true">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Pliki\Hobby\Programowanie\Scratchpad\Editor\src\main\resources\com\mpcs\scratchpad\editor" />
+      <recent name="D:\Pliki\Hobby\Programowanie\Scratchpad\Config\src\main\resources\META-INF\services" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Pliki\Hobby\Programowanie\Scratchpad\Editor" />
+      <recent name="D:\Pliki\Hobby\Programowanie\Scratchpad\libs" />
+      <recent name="D:\Pliki\Hobby\Programowanie\Scratchpad\Editor\src\main\resources\com\mpcs\scratchpad\editor" />
+      <recent name="D:\Pliki\Hobby\Programowanie\Scratchpad\Editor\src\main\java" />
+      <recent name="D:\Pliki\Hobby\Programowanie\Scratchpad\Utility\src\main\java\com\mpcs\util" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mpcs.scratchpad" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle dependenciesInsight" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Editor" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-20" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.mpcs.scratchpad.editor.Main" />
+      <module name="Scratchpad.Editor.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.mpcs.scratchpad.Main" />
       <module name="Scratchpad.main" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.mpcs.scratchpad.*" />
@@ -109,56 +140,78 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scratchpad [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Scratchpad [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Scratchpad [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Editor [run]" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Scratchpad [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="shadowJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Scratchpad:Editor [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Editor" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Scratchpad:Editor [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Editor" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -175,34 +228,64 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="Scratchpad:Editor [uberJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Editor" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="uberJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Application.Scratchpad" />
-      <item itemvalue="Gradle.Scratchpad [jar]" />
-      <item itemvalue="Gradle.Scratchpad [build]" />
-      <item itemvalue="Gradle.Scratchpad [clean]" />
+      <item itemvalue="Application.Editor" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Gradle.Editor [run]" />
+      <item itemvalue="Gradle.Scratchpad [shadowJar]" />
+      <item itemvalue="Gradle.Scratchpad:Editor [assemble]" />
+      <item itemvalue="Gradle.Scratchpad:Editor [jar]" />
+      <item itemvalue="Gradle.Scratchpad:Editor [uberJar]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Scratchpad [jar]" />
-        <item itemvalue="Application.Scratchpad" />
-        <item itemvalue="Gradle.Scratchpad [build]" />
-        <item itemvalue="Gradle.Scratchpad [clean]" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.Scratchpad [shadowJar]" />
+        <item itemvalue="Gradle.Scratchpad:Editor [uberJar]" />
+        <item itemvalue="Gradle.Scratchpad:Editor [assemble]" />
+        <item itemvalue="Gradle.Scratchpad:Editor [jar]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b81afd6a-dd54-47dd-9944-0771e0b00737" name="Changes" comment="" />
-      <created>1698581469733</created>
+      <changelist id="d28cc064-d81a-434b-9f3f-496ade8443d4" name="Changes" comment="" />
+      <created>1699389184170</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1698581469733</updated>
+      <updated>1699389184170</updated>
     </task>
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Fix gradle bugs, split into editor and engine" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix gradle bugs, split into editor and engine" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

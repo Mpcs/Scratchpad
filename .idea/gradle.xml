@@ -5,11 +5,12 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="corretto-20" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Config" />
-            <option value="$PROJECT_DIR$/Config/AnnotationProcessor" />
+            <option value="$PROJECT_DIR$/Editor" />
             <option value="$PROJECT_DIR$/Logging" />
             <option value="$PROJECT_DIR$/Utility" />
           </set>

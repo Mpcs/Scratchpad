@@ -5,31 +5,41 @@ import com.mpcs.config.annotations.Config;
 import com.mpcs.logging.Logger;
 import com.mpcs.util.PerformanceMonitor;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Main {
 
     @Config
-    public static int win_w = 100;
+    public static int win_w = 800;
     @Config
-    public static int win_h = 300;
-    @Config
-    public static int maya = 32;
+    public static int win_h = 600;
+
+    //TODO: Consider replacing AWT with Jogl's NEWT and/or improve the engine window
     public static void main(String[] args) {
+
+        if (true)
+        return;
+        System.out.println("SciPad is starting!");
         PerformanceMonitor monitor = new PerformanceMonitor();
         monitor.start();
         ConfigManager.init();
         Logger.log("Config init took " + monitor.getTime() + " ms");
-        Logger.log(Integer.toString(win_w));
 
-/* System.out.println("SciPad is starting!");
-        System.out.println(com.mpcs.config.Config.test);
-        com.mpcs.config.Config.testik();
-        System.out.println(com.mpcs.config.Config.test);
 
-        JFrame frame = new JFrame("SciPad");
-        frame.add(new com.mpcs.scratchpad.MyCanvas(win_w,win_h));
-
-        frame.setLayout(null);
+        JFrame frame = new JFrame("Scratchpad");
         frame.setSize(win_w,win_h);
-        frame.setVisible(true); */
+
+        frame.setLayout(new BorderLayout());
+        Engine engine = new Engine();
+
+        frame.add(engine.getGlJPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        String s = 50 + 30 + "test" + 40 + 40;
+        Logger.log(s);
+
+        engine.getGlWindow().setVisible(true);
     }
 }

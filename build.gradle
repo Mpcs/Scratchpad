@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.mpcs.scratchpad'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url "https://jogamp.org/deployment/maven" }
+}
+
+dependencies {
+    annotationProcessor project(":Config")
+
+    implementation project(path: ':Logging')
+    implementation project(path: ':Config')
+    implementation project(path: ':Utility')
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.jogamp.gluegen:gluegen-rt-main:2.4.0'
+    implementation 'org.jogamp.jogl:jogl-all-main:2.4.0'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += "--enable-preview"
+}
+
+tasks.withType(JavaExec) {
+    jvmArgs += '--enable-preview'
+}
+
+test {
+    useJUnitPlatform()
+}
