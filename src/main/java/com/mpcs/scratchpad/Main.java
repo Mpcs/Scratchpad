@@ -21,6 +21,7 @@ public class Main {
     private static Engine engine;
 
     public static void main(String[] args) {
+        Logger.setShowThread(true);
         Logger.log("Scratchpad is starting!");
         performanceMonitor = new PerformanceMonitor();
 

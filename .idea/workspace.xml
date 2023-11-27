@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28cc064-d81a-434b-9f3f-496ade8443d4" name="Changes" comment="Modify the default engine window, add a simulation (update) thread and proper stopping of the engine.&#10;Removed AWT window, now depending only on JOGL's NEWT">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Simulation.java" afterDir="false" />
+    <list default="true" id="d28cc064-d81a-434b-9f3f-496ade8443d4" name="Changes" comment="Typo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/ConfigElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EngineCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EngineCanvas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/src/main/java/com/mpcs/logging/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/src/main/java/com/mpcs/logging/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Grid.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/MyCanvas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/MyGLEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/rendering/MyGLEventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/MyGLEventListenerEx1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/rendering/MyGLEventListenerEx1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/OneTri.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/rendering/MyGLEventListenerEx1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpcs/scratchpad/rendering/MyGLEventListenerEx1.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +98,7 @@
       <command value="gradle dependenciesInsight" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Editor">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Editor" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-20" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -273,14 +267,31 @@
       <option name="project" value="LOCAL" />
       <updated>1700781109925</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Modify the default engine window, add a simulation (update) thread and proper stopping of the engine.&#10;Removed AWT window, now depending only on JOGL's NEWT">
+      <option name="closed" value="true" />
+      <created>1701095595040</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701095595040</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Typo">
+      <option name="closed" value="true" />
+      <created>1701095669223</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701095669223</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix gradle bugs, split into editor and engine" />
     <MESSAGE value="(WIP)Fix gradle bugs, split into editor and engine" />
     <MESSAGE value="Modify the default engine window, add a simulation (update) thread and proper stopping of the engine.&#10;Removed AWT window, now depending only on JOGL's NEWT" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modify the default engine window, add a simulation (update) thread and proper stopping of the engine.&#10;Removed AWT window, now depending only on JOGL's NEWT" />
+    <MESSAGE value="Typo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Typo" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
