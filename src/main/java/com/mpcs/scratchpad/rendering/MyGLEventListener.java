@@ -1,4 +1,4 @@
-package com.mpcs.scratchpad;
+package com.mpcs.scratchpad.rendering;
 
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.*;

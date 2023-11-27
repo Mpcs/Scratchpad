@@ -1,10 +1,9 @@
-package com.mpcs.scratchpad;
+package com.mpcs.scratchpad.rendering;
 
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.*;
 import com.mpcs.logging.Logger;
 
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -165,7 +164,7 @@ public class MyGLEventListenerEx1 implements GLEventListener {
         gl.glBindBuffer(GL.GL_ARRAY_BUFFER, 0);
 
         Logger.log("A");
-
+        Thread.currentThread().setName("Engine Render Thread (Window)");
     }
 
     @Override

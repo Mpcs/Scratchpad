@@ -1,45 +1,48 @@
 package com.mpcs.scratchpad;
 
+import com.jogamp.nativewindow.WindowClosingProtocol;
+import com.jogamp.newt.event.*;
+import com.jogamp.newt.opengl.GLWindow;
 import com.mpcs.config.ConfigManager;
 import com.mpcs.config.annotations.Config;
 import com.mpcs.logging.Logger;
 import com.mpcs.util.PerformanceMonitor;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class Main {
 
     @Config
-    public static int win_w = 800;
+    public static int default_win_w = 800;
     @Config
-    public static int win_h = 600;
+    public static int default_win_h = 600;
 
-    //TODO: Consider replacing AWT with Jogl's NEWT and/or improve the engine window
+    @Config
+    public static String default_window_title = "Scratchpad Engine";
+    private static PerformanceMonitor performanceMonitor;
+    private static Engine engine;
+
     public static void main(String[] args) {
+        Logger.log("Scratchpad is starting!");
+        performanceMonitor = new PerformanceMonitor();
 
-        if (true)
-        return;
-        System.out.println("SciPad is starting!");
-        PerformanceMonitor monitor = new PerformanceMonitor();
-        monitor.start();
+        performanceMonitor.start();
         ConfigManager.init();
-        Logger.log("Config init took " + monitor.getTime() + " ms");
+        Logger.debug("Config init took " + performanceMonitor.getTime() + " ms");
 
+        engine = new Engine(true);
+        GLWindow glWindow = engine.getGlWindow();
+        glWindow.setSize(default_win_w, default_win_h);
 
-        JFrame frame = new JFrame("Scratchpad");
-        frame.setSize(win_w,win_h);
+        glWindow.setTitle(default_window_title);
+        glWindow.setDefaultCloseOperation(WindowClosingProtocol.WindowClosingMode.DISPOSE_ON_CLOSE);
+        glWindow.addWindowListener(new CloseWindowListener());
 
-        frame.setLayout(new BorderLayout());
-        Engine engine = new Engine();
+        glWindow.setVisible(true);
+    }
 
-        frame.add(engine.getGlJPanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-        String s = 50 + 30 + "test" + 40 + 40;
-        Logger.log(s);
-
-        engine.getGlWindow().setVisible(true);
+    static class CloseWindowListener extends WindowAdapter {
+        @Override
+        public void windowDestroyed(WindowEvent e) {
+            engine.stop();
+        }
     }
 }

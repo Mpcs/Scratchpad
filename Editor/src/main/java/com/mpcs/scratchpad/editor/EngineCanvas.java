@@ -1,18 +1,11 @@
 package com.mpcs.scratchpad.editor;
 
-import com.jogamp.nativewindow.NativeWindow;
-import com.jogamp.nativewindow.javafx.JFXAccessor;
-import com.jogamp.newt.Display;
 import com.jogamp.newt.Window;
 import com.jogamp.newt.event.*;
 import com.jogamp.newt.javafx.NewtCanvasJFX;
-import com.jogamp.newt.util.EDTUtil;
 import com.jogamp.opengl.util.Animator;
-import com.mpcs.logging.Logger;
 import com.mpcs.scratchpad.Engine;
-import javafx.event.Event;
 import javafx.geometry.Bounds;
-import javafx.scene.Scene;
 
 public class EngineCanvas extends NewtCanvasJFX {
     /**
@@ -22,7 +15,7 @@ public class EngineCanvas extends NewtCanvasJFX {
     public final Animator animator;
     public EngineCanvas() {
         super(null);
-        engine = new Engine();
+        engine = new Engine(true);
         this.setNEWTChild(engine.getGlWindow());
         animator = new Animator(engine.getGlWindow());
         animator.start();
@@ -46,6 +39,7 @@ public class EngineCanvas extends NewtCanvasJFX {
     @Override
     public void destroy() {
         animator.stop();
+        engine.stop();
         super.destroy();
     }
 
