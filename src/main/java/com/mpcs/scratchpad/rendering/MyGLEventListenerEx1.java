@@ -67,6 +67,8 @@ public class MyGLEventListenerEx1 implements GLEventListener {
 
     @Override
     public void init(GLAutoDrawable drawable) {
+        Thread.currentThread().setName("EngineRenderThread(Window)");
+
         GL3 gl = drawable.getGL().getGL3();
 
         //compile shaders
@@ -164,7 +166,7 @@ public class MyGLEventListenerEx1 implements GLEventListener {
         gl.glBindBuffer(GL.GL_ARRAY_BUFFER, 0);
 
         Logger.log("A");
-        Thread.currentThread().setName("Engine Render Thread (Window)");
+
     }
 
     @Override

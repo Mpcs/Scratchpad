@@ -13,7 +13,7 @@ public class Engine {
     private final Thread simulationThread;
     public Engine(boolean withRendering) {
         simulation = new Simulation(this);
-        simulationThread = new Thread(simulation, "Engine Update Thread");
+        simulationThread = new Thread(simulation, "EngineUpdateThread");
         simulationThread.start();
 
         if (withRendering) {
