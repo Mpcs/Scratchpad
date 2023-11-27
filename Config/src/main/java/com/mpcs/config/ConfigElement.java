@@ -49,7 +49,7 @@ public class ConfigElement {
                     fieldReference.set(null, value);
                     break;
                 default:
-                    Logger.error ("Unknonwn field type"); // TODO: Throw exception
+                    Logger.error ("Unknown field type"); // TODO: Throw exception
             }
             valueSet = true;
         }
