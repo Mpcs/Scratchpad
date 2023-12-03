@@ -1,15 +1,13 @@
-package com.mpcs.scratchpad.rendering;
+package com.mpcs.scratchpad.engine.rendering;
 
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.*;
 import com.mpcs.logging.Logger;
 
-import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.nio.charset.StandardCharsets;
 
-public class MyGLEventListenerEx1 implements GLEventListener {
+public class Renderer implements GLEventListener {
 
     float[] vertices1 = {
             0.5f,  0.5f, 0.0f,  // top right
@@ -24,7 +22,7 @@ public class MyGLEventListenerEx1 implements GLEventListener {
     };
 
 
-    String vertexShader = """
+    String vertexShaderCode = """
             #version 330 core
             layout (location = 0) in vec3 aPos;
             out vec4 vertexColor;
@@ -36,89 +34,70 @@ public class MyGLEventListenerEx1 implements GLEventListener {
             }
             """;
 
-    String fragmentShader = """
+    String fragmentShaderCode = """
             #version 330 core
             out vec4 FragColor;
                         
             in vec4 vertexColor;
             void main()
             {
-            
                 FragColor = vertexColor;//vec4(1.0f, 0.5f, 0.2f, 1.0f);
             }
             """;
 
-    String fragmentShader2 = """
+    String fragmentShaderCode2 = """
             #version 330 core
             out vec4 FragColor;
                         
             in vec4 vertexColor;
             void main()
             {
-                FragColor = vertexColor;//vec4(0.0f, 0.5f, 0.2f, 1.0f);
+                FragColor = vec4(0.0f, 0.5f, 0.2f, 1.0f);
             }
             """;
 
     int VAO1;
     int VAO2;
     int EBO;
-    int shaderProgram1;
-    int shaderProgram2;
+    ShaderProgram shaderProgram1;
+    ShaderProgram shaderProgram2;
 
     @Override
     public void init(GLAutoDrawable drawable) {
         Thread.currentThread().setName("EngineRenderThread(Window)");
-
         GL3 gl = drawable.getGL().getGL3();
 
-        //compile shaders
-        int vertexShaderId = gl.glCreateShader(GL4.GL_VERTEX_SHADER);
-        gl.glShaderSource(vertexShaderId, 1, new String[]{vertexShader}, null);
-        gl.glCompileShader(vertexShaderId);
-        IntBuffer code = IntBuffer.allocate(1);
-        gl.glGetShaderiv(vertexShaderId, GL4.GL_COMPILE_STATUS, code);
-        int codee = code.get();
-        if (codee != 1) {
-            IntBuffer len = IntBuffer.allocate(1);
-            ByteBuffer bybuff = ByteBuffer.allocate(496);
-            gl.glGetShaderInfoLog(vertexShaderId, 496, len, bybuff);
-            Logger.log("Błąd kompilacji vertex shader: " + StandardCharsets.UTF_8.decode(bybuff));
-        }
-
-        int fragmentShaderId1 = gl.glCreateShader(GL4.GL_FRAGMENT_SHADER);
-        gl.glShaderSource(fragmentShaderId1, 1, new String[]{fragmentShader}, null);
-        gl.glCompileShader(fragmentShaderId1);
-        IntBuffer code2 = IntBuffer.allocate(1);
-        gl.glGetShaderiv(fragmentShaderId1, GL4.GL_COMPILE_STATUS, code2);
-        if (code2.get() != 1) {
-            IntBuffer len = IntBuffer.allocate(1);
-            ByteBuffer bybuff = ByteBuffer.allocate(512);
-            gl.glGetShaderInfoLog(fragmentShaderId1, 512, len, bybuff);
-            Logger.log("Błąd kompilacji fragment shader: " + bybuff.toString());
+        Shader vertexShader = Shader.createVertexShader(vertexShaderCode);
+        Shader fragmentShader1 = Shader.createFragmentShader(fragmentShaderCode);
+        Shader fragmentShader2 = Shader.createFragmentShader(fragmentShaderCode2);
+        try {
+            vertexShader.compile(gl);
+            fragmentShader1.compile(gl);
+            fragmentShader2.compile(gl);
+        } catch (ShaderCompileException e) {
+            throw new RuntimeException(e);
         }
 
 
-        int fragmentShaderId2 = gl.glCreateShader(GL3.GL_FRAGMENT_SHADER);
-        gl.glShaderSource(fragmentShaderId2, 1, new String[]{fragmentShader2}, null);
-        gl.glCompileShader(fragmentShaderId2);
+        shaderProgram1 = new ShaderProgram();
+        shaderProgram1.addShader(vertexShader);
+        shaderProgram1.addShader(fragmentShader1);
 
-        shaderProgram1 = gl.glCreateProgram();
-        gl.glAttachShader(shaderProgram1, vertexShaderId);
-        gl.glAttachShader(shaderProgram1, fragmentShaderId1);
-        gl.glLinkProgram(shaderProgram1);
-        IntBuffer code3 = IntBuffer.allocate(1);
-        gl.glGetProgramiv(shaderProgram1, GL3.GL_LINK_STATUS, code3);
-        if (code3.get() != 1)
-            Logger.log("Błąd linkowania programu shaderowego: " + code.get());
+        shaderProgram2 = new ShaderProgram();
+        shaderProgram2.addShader(vertexShader);
+        shaderProgram2.addShader(fragmentShader2);
 
-        shaderProgram2 = gl.glCreateProgram();
-        gl.glAttachShader(shaderProgram2, vertexShaderId);
-        gl.glAttachShader(shaderProgram2, fragmentShaderId2);
-        gl.glLinkProgram(shaderProgram2);
+        try {
+            shaderProgram1.link(gl);
+            shaderProgram2.link(gl);
+        } catch (ShaderProgramLinkException e) {
+            throw new RuntimeException(e);
+        }
 
-        gl.glDeleteShader(vertexShaderId);
-        gl.glDeleteShader(fragmentShaderId1);
-        gl.glDeleteShader(fragmentShaderId2);
+
+        vertexShader.delete(gl);
+        fragmentShader1.delete(gl);
+        fragmentShader2.delete(gl);
 
         gl.glClearColor(0.2f, 0.3f, 0.5f, 1.0f);
 
@@ -180,13 +159,13 @@ public class MyGLEventListenerEx1 implements GLEventListener {
         GL3 gl = drawable.getGL().getGL3();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
 
-        gl.glUseProgram(shaderProgram1);
+        gl.glUseProgram(shaderProgram1.getID());
         gl.glBindVertexArray(VAO1);
 
         //gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL3.GL_LINE);
         gl.glDrawArrays(GL.GL_TRIANGLES, 0, 3);
 
-        gl.glUseProgram(shaderProgram2);
+        gl.glUseProgram(shaderProgram2.getID());
         gl.glBindVertexArray(VAO2);
         gl.glDrawArrays(GL.GL_TRIANGLES, 0, 3);
 

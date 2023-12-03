@@ -4,7 +4,7 @@ import com.jogamp.newt.Window;
 import com.jogamp.newt.event.*;
 import com.jogamp.newt.javafx.NewtCanvasJFX;
 import com.jogamp.opengl.util.Animator;
-import com.mpcs.scratchpad.Engine;
+import com.mpcs.scratchpad.engine.Engine;
 import javafx.geometry.Bounds;
 
 public class EngineCanvas extends NewtCanvasJFX {
