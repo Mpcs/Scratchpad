@@ -4,23 +4,26 @@ import com.jogamp.newt.Window;
 import com.jogamp.newt.event.*;
 import com.jogamp.newt.javafx.NewtCanvasJFX;
 import com.jogamp.opengl.util.Animator;
+import com.mpcs.logging.Logger;
 import com.mpcs.scratchpad.engine.Engine;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.scene.Scene;
 
 public class EngineCanvas extends NewtCanvasJFX {
     /**
      * Instantiates an Engine and prepares to render its GLwindow.
      */
     public final Engine engine;
-    public final Animator animator;
+
     public EngineCanvas() {
         super(null);
         engine = new Engine(true);
         this.setNEWTChild(engine.getGlWindow());
-        animator = new Animator(engine.getGlWindow());
-        animator.start();
 
-        //Broken focus dirty fix
+        //fix the NewtCanvasJFX being unable to give up focus
         EngineCanvas self = this;
         engine.getGlWindow().addWindowListener(new WindowAdapter() {
             @Override
@@ -36,10 +39,10 @@ public class EngineCanvas extends NewtCanvasJFX {
         });
     }
 
+
     @Override
     public void destroy() {
-        animator.stop();
-        engine.stop();
+        this.engine.stop();
         super.destroy();
     }
 

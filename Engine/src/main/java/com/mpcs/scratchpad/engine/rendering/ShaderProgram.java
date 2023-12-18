@@ -1,11 +1,20 @@
 package com.mpcs.scratchpad.engine.rendering;
 
+import com.jogamp.common.nio.Buffers;
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
+import com.mpcs.logging.Logger;
+import jogamp.opengl.util.av.EGLMediaPlayerImpl;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class ShaderProgram {
@@ -41,5 +50,44 @@ public class ShaderProgram {
 
     public int getID() {
         return id;
+    }
+
+    public void setUniform4f(GL3 gl, String uniformName, float x, float y, float z, float w) {
+        int uniformLocation = gl.glGetUniformLocation(this.id, uniformName);
+        gl.glUseProgram(this.id);
+        gl.glUniform4f(uniformLocation, x, y, z, w);
+        gl.glUseProgram(0);
+    }
+
+    public void setUniform3f(GL3 gl, String uniformName, float x, float y, float z) {
+        int uniformLocation = gl.glGetUniformLocation(this.id, uniformName);
+        gl.glUseProgram(this.id);
+        gl.glUniform3f(uniformLocation, x, y, z);
+        gl.glUseProgram(0);
+    }
+
+    public void setUniform1i(GL3 gl, String uniformName, int i) {
+        int uniformLocation = gl.glGetUniformLocation(this.id, uniformName);
+        gl.glUseProgram(this.id);
+        gl.glUniform1i(uniformLocation, i);
+        gl.glUseProgram(0);
+    }
+
+    public void setUniform1f(GL3 gl, String uniformName, float val) {
+        int uniformLocation = gl.glGetUniformLocation(this.id, uniformName);
+        gl.glUseProgram(this.id);
+        gl.glUniform1f(uniformLocation, val);
+        gl.glUseProgram(0);
+    }
+
+    public void setUniformMatrix4fv(GL3 gl, String uniformName, Matrix4f matrix4f) {
+        int uniformLocation = gl.glGetUniformLocation(this.id, uniformName);
+        FloatBuffer matrixBuffer = Buffers.newDirectFloatBuffer(16);
+        matrix4f.getTransposed(matrixBuffer);
+        gl.glUseProgram(this.id);
+        //matrix4f.get
+
+        gl.glUniformMatrix4fv(uniformLocation, 1, true, matrixBuffer);
+        gl.glUseProgram(0);
     }
 }

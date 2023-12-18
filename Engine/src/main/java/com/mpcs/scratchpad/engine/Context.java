@@ -1,17 +1,17 @@
 package com.mpcs.scratchpad.engine;
 
 import com.mpcs.scratchpad.engine.rendering.Renderer;
+import com.mpcs.scratchpad.simulation.Simulation;
 
 public class Context {
+    private final Engine engine;
     private Renderer renderer;
     private Simulation simulation;
     private InputManager inputManager;
 
-    public Context() {
-
+    public Context(Engine engine) {
+        this.engine = engine;
     }
-
-
 
     void setRenderer(Renderer renderer) {
         if (this.renderer != null)
@@ -44,5 +44,9 @@ public class Context {
 
     public InputManager getInputManager() {
         return inputManager;
+    }
+
+    public Engine getEngine() {
+        return engine;
     }
 }

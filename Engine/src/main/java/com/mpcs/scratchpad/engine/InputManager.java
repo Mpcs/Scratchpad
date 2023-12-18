@@ -1,17 +1,36 @@
 package com.mpcs.scratchpad.engine;
 
 import com.jogamp.newt.event.*;
+import com.mpcs.logging.Logger;
+
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class InputManager implements KeyListener, MouseListener {
 
+    private Context context;
+    private List<Short> pressedKeys = new ArrayList<>();
+
+    public InputManager(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if (!e.isAutoRepeat())
+            pressedKeys.add(e.getKeyCode());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if(!e.isAutoRepeat())
+            pressedKeys.remove(Short.valueOf(e.getKeyCode()));
+    }
 
+    public boolean isKeyPressed(short keyCode) {
+        return pressedKeys.contains(keyCode);
     }
 
     @Override
@@ -41,7 +60,6 @@ public class InputManager implements KeyListener, MouseListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
     }
 
     @Override

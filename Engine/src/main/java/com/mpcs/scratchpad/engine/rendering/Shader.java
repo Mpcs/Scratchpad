@@ -4,7 +4,6 @@ import com.jogamp.opengl.GL3;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.nio.charset.Charset;
 
 public class Shader {
 

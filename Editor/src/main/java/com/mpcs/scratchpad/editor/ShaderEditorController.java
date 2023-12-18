@@ -43,7 +43,6 @@ public class ShaderEditorController implements Initializable {
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Logger.log("Controller init!");
         mainEngineCanvas.widthProperty().bind(wrapperPane.widthProperty());
         mainEngineCanvas.heightProperty().bind(wrapperPane.heightProperty());
     }
