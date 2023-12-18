@@ -1,23 +1,18 @@
-package com.mpcs.scratchpad.simulation.loops;
+package com.mpcs.scratchpad.engine.simulation.loops;
 
-import com.jogamp.newt.event.KeyEvent;
-import com.mpcs.logging.Logger;
-import com.mpcs.scratchpad.engine.scene.nodes.Model3DNode;
-import com.mpcs.scratchpad.engine.scene.nodes.Node;
 import com.mpcs.util.LimitedQueue;
 
 import java.util.Queue;
 import java.util.function.Consumer;
 
-public class MyInpreciseLoop extends SimulationLoop{
-
+public class MyImpreciseLoop extends SimulationLoop{
 
     private static final int FRAMES_PER_SEC = 60;
-    private static final double MILIS_PER_FRAME = (1000.0/FRAMES_PER_SEC); // 1000 miliseconds per second
+    private static final double MILIS_PER_FRAME = (1000.0/FRAMES_PER_SEC); // 1000 milliseconds per second
 
     private Queue<Double> lastFrameTimes = new LimitedQueue<>(FRAMES_PER_SEC);
 
-    public MyInpreciseLoop(Consumer<Double> updateFunction) {
+    public MyImpreciseLoop(Consumer<Double> updateFunction) {
         super(updateFunction);
     }
 

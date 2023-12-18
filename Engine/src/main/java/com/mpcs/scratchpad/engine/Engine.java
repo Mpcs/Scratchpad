@@ -9,7 +9,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.mpcs.scratchpad.engine.rendering.Renderer;
-import com.mpcs.scratchpad.simulation.Simulation;
+import com.mpcs.scratchpad.engine.simulation.Simulation;
 
 public class Engine {
 

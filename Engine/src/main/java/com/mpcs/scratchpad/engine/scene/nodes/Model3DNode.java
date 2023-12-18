@@ -1,10 +1,8 @@
 package com.mpcs.scratchpad.engine.scene.nodes;
 
 import com.jogamp.opengl.GL3;
-import com.mpcs.scratchpad.engine.rendering.ArrayMesh3D;
 import com.mpcs.scratchpad.engine.rendering.Mesh3D;
 import com.mpcs.scratchpad.engine.rendering.ShaderProgram;
-import com.mpcs.scratchpad.engine.rendering.IndicesMesh3D;
 import org.joml.Vector3f;
 
 public class Model3DNode extends Node {

@@ -1,8 +1,6 @@
 package com.mpcs.scratchpad.engine;
 
 import com.jogamp.nativewindow.WindowClosingProtocol;
-import com.jogamp.newt.event.WindowAdapter;
-import com.jogamp.newt.event.WindowEvent;
 import com.jogamp.newt.opengl.GLWindow;
 import com.mpcs.config.ConfigManager;
 import com.mpcs.config.annotations.Config;

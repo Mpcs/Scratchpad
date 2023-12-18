@@ -1,7 +1,7 @@
 package com.mpcs.scratchpad.engine;
 
 import com.mpcs.scratchpad.engine.rendering.Renderer;
-import com.mpcs.scratchpad.simulation.Simulation;
+import com.mpcs.scratchpad.engine.simulation.Simulation;
 
 public class Context {
     private final Engine engine;

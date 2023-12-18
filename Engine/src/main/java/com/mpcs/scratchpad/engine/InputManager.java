@@ -1,12 +1,9 @@
 package com.mpcs.scratchpad.engine;
 
 import com.jogamp.newt.event.*;
-import com.mpcs.logging.Logger;
 
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class InputManager implements KeyListener, MouseListener {
 
@@ -72,35 +69,3 @@ public class InputManager implements KeyListener, MouseListener {
 
     }
 }
-
-
-
-
-
-
-
-//private final Simulation simulation;
-//
-//        KbListener(Simulation simulation) {
-//            this.simulation = simulation;
-//        }
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            if (e.getKeyChar() == 'a') {
-//                Logger.log("a pressed"); //placeholder for testing the functionality
-//            }
-//        }
-//    }
-//
-//    public static class MouseListener extends MouseAdapter {
-//        private final Simulation simulation;
-//
-//        MouseListener(Simulation simulation) {
-//            this.simulation = simulation;
-//        }
-//
-//        @Override
-//        public void mouseClicked(MouseEvent e) {
-//            Logger.log("Mouse clicked"); //placeholder for testing the functionality
-//        }
-//    }

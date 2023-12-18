@@ -3,14 +3,8 @@ package com.mpcs.scratchpad.editor;
 import com.jogamp.newt.Window;
 import com.jogamp.newt.event.*;
 import com.jogamp.newt.javafx.NewtCanvasJFX;
-import com.jogamp.opengl.util.Animator;
-import com.mpcs.logging.Logger;
 import com.mpcs.scratchpad.engine.Engine;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
-import javafx.scene.Scene;
 
 public class EngineCanvas extends NewtCanvasJFX {
     /**

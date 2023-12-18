@@ -1,4 +1,4 @@
-package com.mpcs.scratchpad.simulation;
+package com.mpcs.scratchpad.engine.simulation;
 
 import com.jogamp.newt.event.KeyEvent;
 import com.mpcs.logging.Logger;
@@ -8,11 +8,9 @@ import com.mpcs.scratchpad.engine.rendering.ArrayMesh3D;
 import com.mpcs.scratchpad.engine.scene.nodes.Node;
 import com.mpcs.scratchpad.engine.scene.Scene;
 import com.mpcs.scratchpad.engine.scene.nodes.Model3DNode;
-import com.mpcs.scratchpad.simulation.loops.MinecraftLoop;
-import com.mpcs.scratchpad.simulation.loops.SimulationLoop;
-import com.mpcs.util.LimitedQueue;
+import com.mpcs.scratchpad.engine.simulation.loops.SimulationLoop;
+import com.mpcs.scratchpad.engine.simulation.loops.MinecraftLoop;
 
-import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Simulation implements Runnable{
@@ -96,9 +94,9 @@ public class Simulation implements Runnable{
         Node rootNode = new Node();
         ArrayMesh3D mesh3D = new ArrayMesh3D(verticesNoIndices);
 
-        for (int i = 0; i < cubePositions.length; i++) {
+        for (Vector3 cubePosition : cubePositions) {
             Model3DNode newBoxNode = new Model3DNode(mesh3D);
-            newBoxNode.setRelativePosition(cubePositions[i]);
+            newBoxNode.setRelativePosition(cubePosition);
             rootNode.addChild(newBoxNode);
         }
 
@@ -126,11 +124,6 @@ public class Simulation implements Runnable{
         for (Node node : scene.getAllNodes()) {
             if (node instanceof Model3DNode model3DNode) {
                 model3DNode.rotation += 1;
-                //try {
-                //    Thread.sleep((long) (MILIS_PER_FRAME/2));
-                //} catch (InterruptedException e) {
-                //    throw new RuntimeException(e);
-                //}
             }
         }
 

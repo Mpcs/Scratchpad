@@ -1,9 +1,6 @@
-package com.mpcs.scratchpad.simulation.loops;
-
-import com.mpcs.logging.Logger;
+package com.mpcs.scratchpad.engine.simulation.loops;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * Loop implementation inspired by minecraft.

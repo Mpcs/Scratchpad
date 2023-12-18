@@ -1,26 +1,20 @@
 package com.mpcs.scratchpad.engine.rendering;
 
 import com.jogamp.opengl.*;
-import com.jogamp.opengl.math.Matrix4;
-import com.mpcs.logging.Logger;
-import com.mpcs.math.Vector3;
 import com.mpcs.scratchpad.engine.Context;
 import com.mpcs.scratchpad.engine.Engine;
 import com.mpcs.scratchpad.engine.scene.nodes.Node;
 import com.mpcs.scratchpad.engine.scene.nodes.Model3DNode;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.List;
-import java.util.Locale;
 
 public class Renderer implements GLEventListener {
 
@@ -64,25 +58,9 @@ public class Renderer implements GLEventListener {
             }
             """;
 
-    String fragmentShaderCode2 = """
-            #version 330 core
-            out vec4 FragColor;
-                        
-            in vec4 vertexColor;
-            
-            void main()
-            {
-                FragColor = vec4(0.0f, 0.5f, 0.2f, 1.0f);
-            }
-            """;
-
-    int VAO;
-    int VBO;
-    int EBO;
     int texture;
     int texture2;
     ShaderProgram shaderProgram1;
-    ShaderProgram shaderProgram2;
     private final Context context;
     private final Engine engine;
 
@@ -100,28 +78,19 @@ public class Renderer implements GLEventListener {
 
         Shader vertexShader = Shader.createVertexShader(vertexShaderCode);
         Shader fragmentShader1 = Shader.createFragmentShader(fragmentShaderCode);
-        //Shader fragmentShader2 = Shader.createFragmentShader(fragmentShaderCode2);
         try {
             vertexShader.compile(gl);
             fragmentShader1.compile(gl);
-            //fragmentShader2.compile(gl);
         } catch (ShaderCompileException e) {
             throw new RuntimeException(e);
         }
-
 
         shaderProgram1 = new ShaderProgram();
         shaderProgram1.addShader(vertexShader);
         shaderProgram1.addShader(fragmentShader1);
 
-
-        //shaderProgram2 = new ShaderProgram();
-        //shaderProgram2.addShader(vertexShader);
-        //shaderProgram2.addShader(fragmentShader2);
-
         try {
             shaderProgram1.link(gl);
-            //shaderProgram2.link(gl);
         } catch (ShaderProgramLinkException e) {
             throw new RuntimeException(e);
         }
@@ -131,22 +100,16 @@ public class Renderer implements GLEventListener {
 
         vertexShader.delete(gl);
         fragmentShader1.delete(gl);
-        //fragmentShader2.delete(gl);
         texture = loadTexture(gl, "D:\\Pliki\\Hobby\\Programowanie\\Scratchpad\\Engine\\src\\main\\resources\\container.jpg", GL.GL_RGB);
         texture2 = loadTexture(gl, "D:\\Pliki\\Hobby\\Programowanie\\Scratchpad\\Engine\\src\\main\\resources\\awesomeface.png", GL.GL_RGBA);
         gl.glBindTexture(GL.GL_TEXTURE_2D, 0);
+
         gl.glClearColor(0.2f, 0.3f, 0.5f, 1.0f);
-
-
-        Vector4f vector4f = new Vector4f(1.0f, 0.0f, 0.0f, 1.0f);
-
         gl.glEnable(GL.GL_DEPTH_TEST);
-
     }
 
-    private static int loadTexture(GL gl, String path, int type) {
+    private static int loadTexture(GL gl, String path, int type) { //TODO: IMPLEMENT PROPER IMAGE LOADER
         BufferedImage image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] rgb;
         try {
             image = ImageIO.read(new File(path));
@@ -220,28 +183,14 @@ public class Renderer implements GLEventListener {
         float secondsSinceStart = (float) drawable.getAnimator().getTotalFPSDuration() /1000;
         float greenValue = (float) (Math.sin(secondsSinceStart) / 2.0f + 0.5f);
 
-
-
         shaderProgram1.setUniform4f(gl, "ourColor", 0.0f, greenValue, 0.0f, 1.0f);
         shaderProgram1.setUniform3f(gl, "offset", (float) Math.sin(0), 0.4f, 0.0f);
-        shaderProgram1.setUniform1f(gl, "mixVal", (float) Math.sin(0));//context.getInputManager().displ);
-
-
-        //vector4f.mul(trans);
-        //Logger.log("\n" + trans.toString());
-
-        float radius = 10f;
-        float camX = (float) (Math.sin(secondsSinceStart) * radius);
-        float camZ = (float) (Math.cos(secondsSinceStart) *radius);
+        shaderProgram1.setUniform1f(gl, "mixVal", (float) Math.sin(0));
 
         Camera camera = context.getSimulation().getScene().camera;
 
-        //Vector3f camPosition = new Vector3f(camX, 0.0f, camZ);
-        //Vector3f targetPosition = new Vector3f(0.0f, 0.0f, 0.0f);
-        //Vector3f worldUp = new Vector3f(0.0f, 1.0f, 0.0f);
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.lookAt(camera.position, camera.position.add(camera.front, new Vector3f()), camera.up);
-        //viewMatrix.translate(new Vector3f(0.0f, 0.0f, -10.0f));
 
         Matrix4f projectionMatrix = new Matrix4f();
         projectionMatrix.perspective((float) Math.toRadians(45), (float) context.getEngine().getGlWindow().getWidth() /context.getEngine().getGlWindow().getHeight(), 0.1f, 100.0f);
@@ -258,22 +207,9 @@ public class Renderer implements GLEventListener {
                 modelMatrix.translate(new Vector3f(node.getAbsolutePosition().toArray()));
                 modelMatrix.rotate((float) Math.toRadians(model3DNode.rotation), new Vector3f(0.5f, 1.0f, 0.0f));
                 shaderProgram1.setUniformMatrix4fv(gl, "model", modelMatrix);
-
-                //trans.identity();
-                //trans.translate(new Vector3f(node.getAbsolutePosition().toArray()));
-                //trans.rotate(model3DNode.rotation, 1.0f, 0.0f, 0.0f);
-                //trans.scale(model3DNode.scale);
-
-                //shaderProgram1.setUniformMatrix4fv(gl, "transform", trans);
-
-
                 model3DNode.render(gl, shaderProgram1);
             }
         }
-
-
-
-        //gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL3.GL_LINE);
     }
 
     @Override

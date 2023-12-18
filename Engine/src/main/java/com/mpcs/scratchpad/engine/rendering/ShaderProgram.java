@@ -1,20 +1,14 @@
 package com.mpcs.scratchpad.engine.rendering;
 
 import com.jogamp.common.nio.Buffers;
-import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import com.mpcs.logging.Logger;
-import jogamp.opengl.util.av.EGLMediaPlayerImpl;
 import org.joml.Matrix4f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 public class ShaderProgram {
