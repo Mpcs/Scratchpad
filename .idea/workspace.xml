@@ -4,25 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28cc064-d81a-434b-9f3f-496ade8443d4" name="Changes" comment="Implement a lot of core functionality. Forgot to commit regularly, so I make this one giant commit.">
+    <list default="true" id="d28cc064-d81a-434b-9f3f-496ade8443d4" name="Changes" comment="Small style changes">
+      <change afterPath="$PROJECT_DIR$/Editor/src/main/resources/com/mpcs/scratchpad/editor/MainSceneView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Config/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/ConfigAnnotationProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Config/src/main/java/com/mpcs/config/annotations/ConfigAnnotationProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/CodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/CodeEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EngineCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EngineCanvas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/ShaderEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/ShaderEditorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/Context.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/InputManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/rendering/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/rendering/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/rendering/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/rendering/ShaderProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/scene/nodes/Model3DNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/scene/nodes/Model3DNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/simulation/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/simulation/Simulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/simulation/loops/MinecraftLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/simulation/loops/MinecraftLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/simulation/loops/MyInpreciseLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/simulation/loops/MyImpreciseLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/simulation/loops/SimulationLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/simulation/loops/SimulationLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EditorApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/src/main/java/com/mpcs/scratchpad/editor/EditorApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/main/java/com/mpcs/scratchpad/engine/scene/Scene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,10 +44,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -90,28 +76,28 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "ignore.preview.features.used": "true",
-    "jdk.selected.JAVA_MODULE": "corretto-20",
-    "jdk.selected.com.intellij.ui.dsl.builder.impl.RowImpl.sdk": "corretto-20",
-    "last_opened_file_path": "D:/Pliki/Hobby/Programowanie/Scratchpad/Editor/src/main/resources/com/mpcs/scratchpad/editor",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.35299808",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "copyright"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-20&quot;,
+    &quot;jdk.selected.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: &quot;corretto-20&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Pliki/Hobby/Programowanie/Scratchpad/Editor/src/main/resources/com/mpcs/scratchpad/editor&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.35299808&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;
   },
-  "keyToStringList": {
-    "jdk.preference.com.intellij.ui.dsl.builder.impl.RowImpl.sdk": [
-      "20=C:/Users/Mpcs/.jdks/corretto-20.0.2.1"
+  &quot;keyToStringList&quot;: {
+    &quot;jdk.preference.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: [
+      &quot;20=C:/Users/Mpcs/.jdks/corretto-20.0.2.1&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.mpcs.scratchpad.simulation.loops" />
@@ -144,13 +130,26 @@
       <command value="gradle dependenciesInsight" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Engine">
+  <component name="RunManager" selected="Gradle.Editor [run]">
     <configuration name="Editor" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-20" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.mpcs.scratchpad.editor.Main" />
       <module name="Scratchpad.Editor.main" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EditorApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mpcs.scratchpad.editor.EditorApp" />
+      <module name="Scratchpad.Editor.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mpcs.scratchpad.editor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -263,6 +262,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.Editor" />
+      <item itemvalue="Application.EditorApp" />
       <item itemvalue="Application.Engine" />
       <item itemvalue="Gradle.Editor [run]" />
       <item itemvalue="Gradle.Vector3Test" />
@@ -271,6 +271,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EditorApp" />
         <item itemvalue="Application.Engine" />
         <item itemvalue="Gradle.D:/Pliki/Hobby/Programowanie/Scratchpad/Engine [build]" />
         <item itemvalue="Gradle.Vector3Test" />
@@ -343,7 +344,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702925250027</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Small style changes">
+      <option name="closed" value="true" />
+      <created>1702926128732</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1702926128732</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -355,7 +364,8 @@
     <MESSAGE value="Shorter Engine thread names" />
     <MESSAGE value="add Engine submodule, shader and ShaderProgram classes. Implement Context." />
     <MESSAGE value="Implement a lot of core functionality. Forgot to commit regularly, so I make this one giant commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement a lot of core functionality. Forgot to commit regularly, so I make this one giant commit." />
+    <MESSAGE value="Small style changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small style changes" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
