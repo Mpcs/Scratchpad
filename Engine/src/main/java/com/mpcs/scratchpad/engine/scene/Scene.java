@@ -17,6 +17,7 @@ public class Scene {
     public Node getRootNode() {
         return rootNode;
     }
+    
     public void addNode(Node node) throws NodeException {
         rootNode.addChild(node);
     }

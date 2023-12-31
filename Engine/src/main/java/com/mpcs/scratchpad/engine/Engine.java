@@ -10,6 +10,7 @@ import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.mpcs.scratchpad.engine.rendering.Renderer;
 import com.mpcs.scratchpad.engine.simulation.Simulation;
+import java.io.IOException;
 
 public class Engine {
 
@@ -19,10 +20,17 @@ public class Engine {
     public final FPSAnimator animator;
     private final Thread simulationThread;
     private final Context context;
+
     public boolean stopped = false;
-    public Engine(boolean withRendering) {
+
+    public Engine(String projectPath, boolean withRendering) throws IOException{
+        this(new ResourceManager(projectPath), withRendering);
+    }
+
+    public Engine(ResourceManager resourceManager, boolean withRendering) {
         context = new Context(this);
 
+        context.setResourceManager(resourceManager);
         context.setInputManager(new InputManager(context));
         context.setRenderer(new Renderer(context));
         context.setSimulation(new Simulation(context));
@@ -34,7 +42,6 @@ public class Engine {
             GLProfile glProfile = GLProfile.getDefault();
             GLCapabilities glCapabilities = new GLCapabilities(glProfile);
             Display jfxNewtDisplay = NewtFactory.createDisplay(null, false);
-
 
             window = GLWindow.create(NewtFactory.createScreen(jfxNewtDisplay, 0), glCapabilities);
             window.addGLEventListener(context.getRenderer());

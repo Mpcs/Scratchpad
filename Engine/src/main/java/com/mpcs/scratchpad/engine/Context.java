@@ -8,9 +8,20 @@ public class Context {
     private Renderer renderer;
     private Simulation simulation;
     private InputManager inputManager;
+    private ResourceManager resourceManager;
 
     public Context(Engine engine) {
         this.engine = engine;
+    }
+
+    void setResourceManager(ResourceManager resourceManager) {
+        if (this.resourceManager != null)
+            throw new UnsupportedOperationException("Trying to overwrite ResourceManager");
+        this.resourceManager = resourceManager;
+    }
+
+    public ResourceManager getResourceManager() {
+        return resourceManager;
     }
 
     void setRenderer(Renderer renderer) {

@@ -1,23 +1,24 @@
 package com.mpcs.scratchpad.engine.scene.nodes;
-
-import com.mpcs.math.Vector3;
+import org.joml.Vector3f;
 import com.mpcs.scratchpad.engine.scene.NodeException;
 
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.io.Serializable;
 
-public class Node {
-    private Vector3 relativePosition;
+public class Node implements Serializable {
+    private Vector3f relativePosition = new Vector3f();
+
     private Set<Node> children;
     private Node parent;
 
     public Node() {
-        this(new Vector3(0, 0, 0));
+        this(new Vector3f(0, 0, 0));
     }
-    public Node(Vector3 relativePosition) {
-        this.relativePosition = relativePosition;
+    public Node(Vector3f relativePosition) {
+        setRelativePosition(relativePosition);
         this.children = new LinkedHashSet<>();
     }
 
@@ -48,20 +49,21 @@ public class Node {
         return parent;
     }
 
-    public Vector3 getRelativePosition() {
-        return relativePosition;
+    public Vector3f getRelativePosition() {
+        return new Vector3f(relativePosition);
     }
 
-    public Vector3 getAbsolutePosition() {
+    public Vector3f getAbsolutePosition() {
         if (parent == null) {
             return relativePosition;
         }
-        Vector3 parentAbsolutePosition = parent.getAbsolutePosition();
-        return parentAbsolutePosition.add(this.getRelativePosition());
+        Vector3f tempVector = this.getRelativePosition();
+        tempVector.add(parent.getAbsolutePosition());
+        return tempVector;
     }
 
-    public void setRelativePosition(Vector3 newPosition) {
-        this.relativePosition = newPosition;
+    public void setRelativePosition(Vector3f newPosition) {
+        this.relativePosition.set(newPosition);
     }
 
     public List<Node> getAllChildrenAndSubChildren() {
@@ -71,5 +73,9 @@ public class Node {
         }
         subChildren.addAll(children);
         return subChildren;
+    }
+
+    public void update(float deltaTime) {
+
     }
 }

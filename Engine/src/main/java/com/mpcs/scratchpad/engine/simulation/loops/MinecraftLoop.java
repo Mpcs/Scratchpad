@@ -45,4 +45,9 @@ public class MinecraftLoop extends SimulationLoop {
     public double getTPS() {
         return lastTPSValue;
     }
+    
+    @Override
+    public boolean controlsRendering() {
+        return false;
+    }
 }

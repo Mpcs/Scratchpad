@@ -1,0 +1,2 @@
+id,nodeType,parent,posx,posy,posz
+id,Model3DNode,parent,posx,posy,posz,rotation,scalex,scaley,scalez,modelfile

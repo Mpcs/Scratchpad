@@ -34,9 +34,9 @@ run {
 }
 
 
-//tasks.withType(JavaExec).configureEach {
-//    jvmArgs += '--add-exports javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED'
-//}
+tasks.withType(JavaExec).configureEach {
+    jvmArgs += '--add-exports javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED'
+}
 
 
 javafx {

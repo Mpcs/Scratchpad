@@ -21,7 +21,7 @@ public class MyImpreciseLoop extends SimulationLoop{
     @Override
     public void tickAndWait() {
             double frameStartTime = System.currentTimeMillis();
-            update(0);
+            update(1);
             double frameEndTime = System.currentTimeMillis();
             double frameDuration = frameEndTime - frameStartTime;
             lastFrameTimes.add(frameDuration);
@@ -41,5 +41,10 @@ public class MyImpreciseLoop extends SimulationLoop{
     public double getTPS() {
         double timeOfLastTicks = lastFrameTimes.stream().mapToDouble(Double::doubleValue).sum()/1000;
         return lastFrameTimes.size() / timeOfLastTicks;
+    }
+
+    @Override
+    public boolean controlsRendering() {
+        return false;
     }
 }

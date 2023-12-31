@@ -1,6 +1,4 @@
 package com.mpcs.scratchpad.engine.simulation.loops;
-
-
 import java.util.function.Consumer;
 
 public abstract class SimulationLoop {
@@ -14,6 +12,7 @@ public abstract class SimulationLoop {
         updateFunction.accept(deltaTime);
     }
 
+    public abstract boolean controlsRendering();
     public abstract void tickAndWait();
     public abstract double getTPS();
 

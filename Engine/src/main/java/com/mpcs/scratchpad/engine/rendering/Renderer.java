@@ -11,6 +11,9 @@ import org.joml.Vector3f;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.Paths;
+import java.net.URL;
+import java.net.URISyntaxException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -54,7 +57,7 @@ public class Renderer implements GLEventListener {
             
             void main()
             {
-                FragColor = mix(texture(texture1, TexCoord), texture(texture2, vec2(TexCoord.x, TexCoord.y)), mixVal);// * vec4(urColor.xyz, 1.0f);
+                FragColor = ourColor;//mix(texture(texture1, TexCoord), texture(texture2, vec2(TexCoord.x, TexCoord.y)), mixVal);// * vec4(urColor.xyz, 1.0f);
             }
             """;
 
@@ -100,12 +103,24 @@ public class Renderer implements GLEventListener {
 
         vertexShader.delete(gl);
         fragmentShader1.delete(gl);
-        texture = loadTexture(gl, "D:\\Pliki\\Hobby\\Programowanie\\Scratchpad\\Engine\\src\\main\\resources\\container.jpg", GL.GL_RGB);
-        texture2 = loadTexture(gl, "D:\\Pliki\\Hobby\\Programowanie\\Scratchpad\\Engine\\src\\main\\resources\\awesomeface.png", GL.GL_RGBA);
+    
+        texture = loadResourceTexture(gl, "container.jpg", GL.GL_RGB);
+        texture2 = loadResourceTexture(gl, "awesomeface.png", GL.GL_RGB);
+        
         gl.glBindTexture(GL.GL_TEXTURE_2D, 0);
 
         gl.glClearColor(0.2f, 0.3f, 0.5f, 1.0f);
         gl.glEnable(GL.GL_DEPTH_TEST);
+    }
+
+    private int loadResourceTexture(GL gl, String resourceName, int type) {
+        try {
+            URL res = getClass().getClassLoader().getResource(resourceName);
+            File file = Paths.get(res.toURI()).toFile();
+            return loadTexture(gl, file.getAbsolutePath(), type);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static int loadTexture(GL gl, String path, int type) { //TODO: IMPLEMENT PROPER IMAGE LOADER
@@ -204,7 +219,7 @@ public class Renderer implements GLEventListener {
             if (node instanceof Model3DNode model3DNode) {
                 trans = new Matrix4f();
                 Matrix4f modelMatrix = new Matrix4f();
-                modelMatrix.translate(new Vector3f(node.getAbsolutePosition().toArray()));
+                modelMatrix.translate(node.getAbsolutePosition());
                 modelMatrix.rotate((float) Math.toRadians(model3DNode.rotation), new Vector3f(0.5f, 1.0f, 0.0f));
                 shaderProgram1.setUniformMatrix4fv(gl, "model", modelMatrix);
                 model3DNode.render(gl, shaderProgram1);

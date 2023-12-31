@@ -6,6 +6,9 @@ import com.mpcs.config.ConfigManager;
 import com.mpcs.config.annotations.Config;
 import com.mpcs.logging.Logger;
 import com.mpcs.util.PerformanceMonitor;
+import com.mpcs.scratchpad.engine.ResourceManager;
+import java.io.IOException;
+import com.mpcs.scratchpad.engine.ObjParser;
 
 public class Main {
 
@@ -19,7 +22,13 @@ public class Main {
     private static PerformanceMonitor performanceMonitor;
     private static Engine engine;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        ResourceManager resourceManager = new ResourceManager();
+
+        new ObjParser().loadFromFile("./testProject/box.obj");
+
+        String projectPath = "./testProject/";
+
         Logger.setShowThread(true);
         Logger.log("Scratchpad is starting!");
         performanceMonitor = new PerformanceMonitor();
@@ -28,7 +37,7 @@ public class Main {
         ConfigManager.init();
         Logger.debug("Config init took " + performanceMonitor.getTime() + " ms");
 
-        engine = new Engine(true);
+        engine = new Engine(projectPath, true);
         GLWindow glWindow = engine.getGlWindow();
         glWindow.setSize(default_win_w, default_win_h);
         glWindow.setResizable(false);
