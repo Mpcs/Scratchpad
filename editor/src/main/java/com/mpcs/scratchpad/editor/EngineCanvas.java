@@ -3,6 +3,8 @@ package com.mpcs.scratchpad.editor;
 import com.jogamp.newt.Window;
 import com.jogamp.newt.event.*;
 import com.jogamp.newt.javafx.NewtCanvasJFX;
+import com.jogamp.newt.opengl.GLWindow;
+import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
 import javafx.geometry.Bounds;
 
@@ -21,11 +23,14 @@ public class EngineCanvas extends NewtCanvasJFX {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.setNEWTChild(engine.getGlWindow());
+
+        GLWindow glWindow = Context.get().getRenderer().getGlWindow();
+
+        this.setNEWTChild(glWindow);
 
         //fix the NewtCanvasJFX being unable to give up focus
         EngineCanvas self = this;
-        engine.getGlWindow().addWindowListener(new WindowAdapter() {
+        glWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowGainedFocus(WindowEvent e) {
                 self.requestFocus();
@@ -33,8 +38,8 @@ public class EngineCanvas extends NewtCanvasJFX {
         });
         this.focusedProperty().addListener((sth, oldValue, newValue) -> {
             if (!newValue) {
-                engine.getGlWindow().setVisible(false);
-                engine.getGlWindow().setVisible(true);
+                glWindow.setVisible(false);
+                glWindow.setVisible(true);
             }
         });
     }

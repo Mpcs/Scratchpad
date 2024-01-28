@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 public class Shader {
-
     private static final int MAX_ERROR_LENGTH = 512;
     private final String code;
     private final int type;

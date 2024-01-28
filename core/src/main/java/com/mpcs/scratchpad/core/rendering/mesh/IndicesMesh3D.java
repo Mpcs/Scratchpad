@@ -15,7 +15,7 @@ public class IndicesMesh3D implements Mesh3D {
     private final int[] indices;
 
     private boolean wasSetUp = false;
-    private int VAO;
+    private int vao;
 
     public IndicesMesh3D(float[] vertices, int[] indices) {
         this.vertices = vertices;
@@ -31,18 +31,18 @@ public class IndicesMesh3D implements Mesh3D {
         gl.glGenBuffers(1, vboBuffer);
         gl.glGenBuffers(1, eboBuffer);
 
-        VAO = vaoBuffer.get();
-        int VBO = vboBuffer.get();
-        int EBO = eboBuffer.get();
+        vao = vaoBuffer.get();
+        int vbo = vboBuffer.get();
+        int ebo = eboBuffer.get();
 
-        gl.glBindVertexArray(VAO);
+        gl.glBindVertexArray(vao);
 
         FloatBuffer verticesBuffer = Buffers.newDirectFloatBuffer(vertices);
-        gl.glBindBuffer(GL.GL_ARRAY_BUFFER, VBO);
+        gl.glBindBuffer(GL.GL_ARRAY_BUFFER, vbo);
         gl.glBufferData(GL.GL_ARRAY_BUFFER, (long) vertices.length * Float.BYTES, verticesBuffer, GL.GL_STATIC_DRAW);
 
         IntBuffer indicesBuffer = Buffers.newDirectIntBuffer(indices);
-        gl.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, EBO);
+        gl.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, ebo);
         gl.glBufferData(GL.GL_ELEMENT_ARRAY_BUFFER, (long) indices.length *Integer.BYTES, indicesBuffer, GL.GL_STATIC_DRAW);
 
         int stride = 8*Float.BYTES;
@@ -67,7 +67,7 @@ public class IndicesMesh3D implements Mesh3D {
         gl.glUseProgram(shaderProgram.getID());
         gl.glActiveTexture(0);
         texture.bind(gl);
-        gl.glBindVertexArray(VAO);
+        gl.glBindVertexArray(vao);
         gl.glDrawElements(GL.GL_TRIANGLES, indices.length, GL.GL_UNSIGNED_INT, 0);
         gl.glBindVertexArray(0);
     }

@@ -3,9 +3,7 @@ package com.mpcs.scratchpad.core;
 import com.mpcs.scratchpad.core.input.InputManager;
 import com.mpcs.scratchpad.core.rendering.Renderer;
 import com.mpcs.scratchpad.core.simulation.Simulation;
-import com.mpcs.scratchpad.core.rendering.Renderer;
 import com.mpcs.scratchpad.core.resources.ResourceManager;
-import com.mpcs.scratchpad.core.simulation.Simulation;
 
 public class Context {
 
@@ -17,6 +15,10 @@ public class Context {
     private InputManager inputManager;
     private ResourceManager resourceManager;
 
+    private Context(Engine engine) {
+        this.engine = engine;
+    }
+
     static Context createContext(Engine engine) {
         if (instance != null) {
             throw new UnsupportedOperationException("Context already exists");
@@ -27,10 +29,6 @@ public class Context {
 
     public static Context get() {
         return instance;
-    }
-
-    private Context(Engine engine) {
-        this.engine = engine;
     }
 
     void setResourceManager(ResourceManager resourceManager) {

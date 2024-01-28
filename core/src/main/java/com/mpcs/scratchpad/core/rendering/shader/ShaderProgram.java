@@ -80,7 +80,6 @@ public class ShaderProgram {
         FloatBuffer matrixBuffer = Buffers.newDirectFloatBuffer(16);
         matrix4f.getTransposed(matrixBuffer);
         gl.glUseProgram(this.id);
-        //matrix4f.get
 
         gl.glUniformMatrix4fv(uniformLocation, 1, true, matrixBuffer);
         gl.glUseProgram(0);

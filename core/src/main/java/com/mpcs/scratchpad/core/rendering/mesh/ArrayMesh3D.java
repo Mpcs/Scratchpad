@@ -3,11 +3,9 @@ package com.mpcs.scratchpad.core.rendering.mesh;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import com.jogamp.opengl.util.GLBuffers;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
 import com.mpcs.scratchpad.core.resources.Image;
 
-import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 

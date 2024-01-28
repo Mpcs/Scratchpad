@@ -16,15 +16,8 @@ import com.mpcs.scratchpad.core.simulation.Simulation;
 import java.io.IOException;
 
 public class Engine {
-
-    private static final int TARGET_FPS = 60;
-
-    private final GLWindow window;
-    public final FPSAnimator animator;
     private final Thread simulationThread;
     private final Context context;
-
-    public boolean stopped = false;
 
     public Engine(String projectPath, boolean withRendering) throws IOException{
         this(new ResourceManager(projectPath), withRendering);
@@ -35,57 +28,25 @@ public class Engine {
 
         context.setResourceManager(resourceManager);
         context.setInputManager(new InputManager());
-        context.setRenderer(new Renderer(context));
-        context.setSimulation(new Simulation(context));
+        if (withRendering) {
+            context.setRenderer(new Renderer());
+        }
+        context.setSimulation(new Simulation());
 
         simulationThread = new Thread(context.getSimulation(), "EngineUpdateThread");
         simulationThread.start();
-
-        if (withRendering) {
-            GLProfile glProfile = GLProfile.getDefault();
-            GLCapabilities glCapabilities = new GLCapabilities(glProfile);
-            Display jfxNewtDisplay = NewtFactory.createDisplay(null, false);
-
-            window = GLWindow.create(NewtFactory.createScreen(jfxNewtDisplay, 0), glCapabilities);
-            window.addGLEventListener(context.getRenderer());
-            window.addKeyListener(context.getInputManager());
-            window.addMouseListener(context.getInputManager());
-            window.addWindowListener(new CloseWindowListener(this));
-
-            animator = new FPSAnimator(window, TARGET_FPS);
-            animator.start();
-            animator.setUpdateFPSFrames(1, null);
-
-        } else {
-            window = null;
-            animator = null;
-        }
     }
 
     public void stop() {
         context.getSimulation().running.set(false);
-        if(animator != null)
-            animator.stop();
-        this.stopped = true;
-    }
-
-    public GLWindow getGlWindow() {
-        return window;
+        context.getRenderer().stop();
     }
 
     public boolean isRunning() {
         return simulationThread.isAlive();
     }
 
-    static class CloseWindowListener extends WindowAdapter {
-
-        private final Engine engine;
-        public CloseWindowListener(Engine engine) {
-            this.engine = engine;
-        }
-        @Override
-        public void windowDestroyed(WindowEvent e) {
-            engine.stop();
-        }
+    public Context getContext() {
+        return context;
     }
 }
