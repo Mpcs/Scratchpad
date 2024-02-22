@@ -6,7 +6,6 @@ import com.mpcs.scratchpad.core.simulation.Simulation;
 import com.mpcs.scratchpad.core.resources.ResourceManager;
 
 public class Context {
-
     private static Context instance;
 
     private final Engine engine;
