@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -72,7 +73,9 @@ public class ResourceManager {
 	}
 
 	public Mesh3D getResourceMesh(String resourceName) throws IOException {
-		ObjFile objModel = ObjFile.loadFromFile(projectDirectory.resolve(resourceName));
+		Path resolvedPath= projectDirectory.resolve(resourceName);
+		
+		ObjFile objModel = ObjFile.loadFromFile(resolvedPath);
 		return new ArrayMesh3D(objModel.getTriangulatedVerticesFormatted(VertexDataFormat.POSITION_TEXTURE));
 	}
 

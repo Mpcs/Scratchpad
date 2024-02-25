@@ -10,10 +10,7 @@ import org.joml.Vector3f;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
+import java.lang.reflect.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -31,7 +28,7 @@ public class SceneFileParserImpl2 implements SceneFileParser{
 
         nodeLineParser = new LineParser().startingWith("[")
                 .parameter("type").parsedWith(TypeParsers.NODE_TYPE_PARSER).until(" ")
-                .parameter("name").withPrefix("name=").until("")
+                .parameter("name").withPrefix("name=").until(" ")
                 .parameter("parent").withPrefix("parent=").until("]");
 
         attributeLineParser = new LineParser().startingWith("| ")
@@ -58,32 +55,32 @@ public class SceneFileParserImpl2 implements SceneFileParser{
                     if (parentName.isEmpty()) {
                         rootNode = currentNode;
                     } else {
-                        //namedNodes.get(parentName).addChild(currentNode);
+                        namedNodes.get(parentName).addChild(currentNode);
                     }
                     namedNodes.put((String) parameters.get("name"), currentNode);
                 } else if (attributeLineParser.matches(line)) {
                     Map<String, Object> parameters = attributeLineParser.parse(line);
                     for (Map.Entry<String, Object> entry : parameters.entrySet()) {
                         String attrName = entry.getKey();
-                        String attrValue = (String) entry.getValue();
+                        Object attrValue = entry.getValue();
+
+
+                        String setterName = "set" + attrName.substring(0,1).toUpperCase() + attrName.substring(1);
+                        Method setterMethod = null;
 
                         for (Method method : currentNode.getClass().getMethods()) {
-                            //System.out.println("set"+ fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1));
-                            if (method.getName().equals("set"+ attrName.substring(0, 1).toUpperCase() + attrName.substring(1))) {
-                                System.out.println(method.getName());
-                                Parameter parameter = method.getParameters()[0];
-                                if(Arrays.stream(parameter.getType().getInterfaces()).toList().contains(Stringable.class)) {
-                                    Method generatorMethod = parameter.getType().getMethod("fromString", String.class);
-                                    Object object = generatorMethod.invoke(null, attrValue.replace("\"", ""));
-                                    method.invoke(currentNode, object);
-                                } else if (parameter.getType().equals(Vector3f.class)) {
-                                    String[] cleanParams = attrValue.replace("(", "").replace(")", "").split(",");
-                                    Vector3f vector3f = new Vector3f(Float.valueOf(cleanParams[0]), Float.valueOf(cleanParams[1]), Float.valueOf(cleanParams[2]));
-                                    method.invoke(currentNode, vector3f);
-                                }
-
+                            if(method.getName().equals(setterName)) {
+                                setterMethod = method;
+                                break;
                             }
                         }
+                        Class<?> parameterType = setterMethod.getParameterTypes()[0];
+
+                        if (attrValue instanceof String stringValue) {
+                            attrValue = TypeParsers.parse(stringValue, parameterType);
+                        }
+
+                        setterMethod.invoke(currentNode, attrValue);
                     }
                 }
                 System.out.println(line);
@@ -96,8 +93,6 @@ public class SceneFileParserImpl2 implements SceneFileParser{
             throw new RuntimeException(e);
         }
 
-        Scene scene = new Scene(rootNode);
-
-        return scene;
+        return new Scene(rootNode);
     }
 }

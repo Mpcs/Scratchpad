@@ -36,8 +36,6 @@ public class LineParameter {
         Object objValue = stringValue;
         if (typeParser != null) {
             objValue = typeParser.parse(stringValue);
-        } else {
-            objValue = stringValue;
         }
         return new AbstractMap.SimpleEntry<>(name, objValue);
     }
