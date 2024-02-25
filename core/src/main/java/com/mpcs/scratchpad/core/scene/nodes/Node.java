@@ -78,6 +78,6 @@ public class Node {
     }
 
     public void update(float deltaTime) {
-
+        // method empty for override
     }
 }

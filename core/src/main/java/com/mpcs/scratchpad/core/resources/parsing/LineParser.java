@@ -38,6 +38,14 @@ public class LineParser {
             Map.Entry<String, Object> parse = fileSpecParameter.parse(line);
             result.put(parse.getKey(), parse.getValue());
 
+            if (parse.getValue() == null) {
+                continue;
+            }
+
+            if (parse.getValue() instanceof String s && s.isEmpty()) {
+                continue;
+            }
+
             line = fileSpecParameter.trim(line);
         }
         return result;

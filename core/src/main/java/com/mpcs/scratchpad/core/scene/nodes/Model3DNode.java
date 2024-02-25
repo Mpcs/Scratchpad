@@ -59,7 +59,8 @@ public class Model3DNode extends Node {
     }
 
     public void render(GL3 gl, ShaderProgram shaderProgram) {
-        mesh3D.render(gl, shaderProgram, texture);
+        if (mesh3D != null)
+            mesh3D.render(gl, shaderProgram, texture);
     }
 
 }

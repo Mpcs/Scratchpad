@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-public class Image implements Stringable {
+public class Image {
 
     private final BufferedImage contents;
     private final byte[] rgba;
@@ -84,13 +84,5 @@ public class Image implements Stringable {
             compile(gl);
         }
         gl.glBindTexture(GL.GL_TEXTURE_2D, this.glId);
-    }
-
-    public static Object fromString(String string) {
-        try {
-            return Context.get().getResourceManager().getResourceImage(string);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

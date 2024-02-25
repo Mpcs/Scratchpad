@@ -7,18 +7,20 @@ import com.mpcs.scratchpad.core.resources.obj.VertexDataFormat;
 import com.mpcs.scratchpad.core.scene.Scene;
 
 import javax.imageio.ImageIO;
+import javax.tools.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ResourceManager {
 
@@ -58,9 +60,8 @@ public class ResourceManager {
 	}
 
 	public Scene loadScene(String sceneName) {
-		SceneFileParser sceneFileParser = new SceneFileParserImpl2(projectDirectory.resolve(sceneName));
-		//return new OGScene();
-		return sceneFileParser.toScene();// new OGScene();
+		SceneFileParser sceneFileParser = new SceneFileParser(projectDirectory.resolve(sceneName));
+		return sceneFileParser.toScene();
 	}
 
 	public Image getResourceImage(String resourceName) throws IOException {
@@ -87,4 +88,58 @@ public class ResourceManager {
 		return op.filter(image, null);
 	}
 
+	public Class<?> loadClass(String filePath) {
+		Path fileResolvedPath = projectDirectory.resolve(filePath);
+		File file = fileResolvedPath.toFile();
+		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
+		JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
+		StandardJavaFileManager fileManager = javaCompiler.getStandardFileManager(diagnostics, null, null);
+
+		List<String> optionList = new ArrayList<String>();
+		optionList.add("-classpath");
+		optionList.add(System.getProperty("java.class.path") + File.pathSeparator + "dist/InlineCompiler.jar");
+		optionList.add("-d");
+		optionList.add(projectDirectory.resolve("build/").toString());
+		Iterable<? extends JavaFileObject> compilationUnit
+				= fileManager.getJavaFileObjectsFromFiles(Arrays.asList(file));
+		JavaCompiler.CompilationTask task = javaCompiler.getTask(
+				null,
+				fileManager,
+				diagnostics,
+				optionList,
+				null,
+				compilationUnit);
+
+		if (task.call()) {
+			/** Load and execute *************************************************************************************************/
+			System.out.println("Yipe");
+			// Create a new custom class loader, pointing to the directory that contains the compiled
+			// classes, this should point to the top of the package structure!
+			try {
+				URLClassLoader classLoader = null;
+
+				classLoader = new URLClassLoader(new URL[]{projectDirectory.resolve("build/").toUri().toURL()});
+
+				// Load the class from the classloader by name....
+				Class<?> loadedClass = classLoader.loadClass(filePath.replace(".java", ""));
+				return loadedClass;
+			} catch (ClassNotFoundException | MalformedURLException e) {
+				throw new RuntimeException(e);
+			}
+			// Create a new instance...
+			/************************************************************************************************* Load and execute **/
+		} else {
+			for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics.getDiagnostics()) {
+				System.out.format("Error on line %d in %s%n",
+						diagnostic.getLineNumber(),
+						diagnostic.getSource().toUri());
+			}
+		}
+		try {
+			fileManager.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return null;
+	}
 }
