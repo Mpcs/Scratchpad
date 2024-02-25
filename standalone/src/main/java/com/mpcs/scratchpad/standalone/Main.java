@@ -14,7 +14,11 @@ public class Main {
     public static final String DEFAULT_WINDOW_TITLE = "Scratchpad Engine";
 
     public static void main(String[] args) throws IOException {
-        String projectPath = "./testProject/";
+        if (args.length == 0) {
+            System.out.println("Provide project path as an argument.");
+            return;
+        }
+        String projectPath = args[0];
 
         Engine engine = new Engine(projectPath, true); // TODO: Builder?
         GLWindow glWindow = engine.getContext().getRenderer().getGlWindow();

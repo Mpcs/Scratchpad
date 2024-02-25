@@ -6,6 +6,7 @@ import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import com.mpcs.scratchpad.core.scene.nodes.Node;
 
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class NodeTypeParser implements TypeParser<Class<? extends Node>>{
     public Class<? extends Node> parse(String typeName) throws TypeParseException {
         Set<Class<? extends Node>> nodeClasses = Registries.getRegistryTypes(Node.class);
 
-        List<Class<? extends Node>> list = nodeClasses.stream().filter(val -> val.getName().endsWith(typeName)).toList();
+        List<Class<? extends Node>> list = nodeClasses.stream().filter(val -> Arrays.stream(val.getName().split("\\.")).toList().getLast().equals(typeName)).toList();
         if (list.isEmpty()) {
             throw new TypeParseException("Type not found: " + typeName);
         }

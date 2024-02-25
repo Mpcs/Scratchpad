@@ -49,7 +49,13 @@ public class SceneFileParser {
                     Class<? extends Node> nodeClass = (Class<? extends Node>) parameters.get("type");
                     Class<?> scriptClass = (Class<?>) parameters.get("script");
                     if (scriptClass != null) {
-                        nodeClass = (Class<? extends Node>) scriptClass;
+                        System.out.println(scriptClass.getSuperclass().getName());
+                        System.out.println(nodeClass.getName());
+                        if (scriptClass.getSuperclass().equals(nodeClass)) {
+                            nodeClass = (Class<? extends Node>) scriptClass;
+                        } else {
+                            throw new RuntimeException("Loaded class: " + scriptClass.getName() + " should extend " + nodeClass.getName());
+                        }
                     }
                     Constructor<?> constructor = nodeClass.getConstructor();
                     currentNode = (Node) constructor.newInstance();
