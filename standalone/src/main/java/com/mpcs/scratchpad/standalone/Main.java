@@ -2,6 +2,7 @@ package com.mpcs.scratchpad.standalone;
 
 import com.jogamp.nativewindow.WindowClosingProtocol;
 import com.jogamp.newt.opengl.GLWindow;
+import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class Main {
         String projectPath = "./testProject/";
 
         Engine engine = new Engine(projectPath, true); // TODO: Builder?
-        GLWindow glWindow = engine.getGlWindow();
+        GLWindow glWindow = engine.getContext().getRenderer().getGlWindow();
         glWindow.setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
         glWindow.setResizable(false);
 

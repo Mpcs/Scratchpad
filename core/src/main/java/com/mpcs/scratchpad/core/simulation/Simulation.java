@@ -17,24 +17,21 @@ public class Simulation implements Runnable {
     final Context context;
     private Scene scene;
 
-    public Simulation(Context context) {
+    public Simulation() {
+        this.context = Context.get();
         this.scene = context.getResourceManager().loadInitialScene();
-        this.context = context;
     }
 
     private long framesSinceStart = 0;
     @Override
     public void run() {
-        //Logger.info(Thread.currentThread().getName());
         running.set(true);
 
         SimulationLoop simulationLoop = new MinecraftLoop(this::update, 60);
         while(running.get()) {
             simulationLoop.tickAndWait();
             framesSinceStart++;
-            if(DISPLAY_TPS && framesSinceStart % 60 == 0) {
-                //Logger.debug(String.valueOf(simulationLoop.getTPS()));
-            }
+
         }
     }
 

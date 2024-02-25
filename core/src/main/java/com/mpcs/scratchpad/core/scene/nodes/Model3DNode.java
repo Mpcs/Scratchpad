@@ -4,8 +4,10 @@ import com.jogamp.opengl.GL3;
 import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
 import com.mpcs.scratchpad.core.resources.Image;
+import com.mpcs.scratchpad.core.scene.nodes.annotation.RegisterNode;
 import org.joml.Vector3f;
 
+@RegisterNode
 public class Model3DNode extends Node {
 
     private Mesh3D mesh3D;
@@ -13,6 +15,10 @@ public class Model3DNode extends Node {
 
     public float rotation = 0;
     public Vector3f scale = new Vector3f(1.0f);
+
+    public Model3DNode() {
+
+    }
 
     public Model3DNode(Mesh3D mesh, Image texture) {
         this.mesh3D = mesh;

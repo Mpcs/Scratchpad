@@ -1,15 +1,16 @@
 package com.mpcs.scratchpad.core.scene.nodes;
 
 import com.mpcs.scratchpad.core.scene.NodeException;
+import com.mpcs.scratchpad.core.scene.nodes.annotation.RegisterNode;
 import org.joml.Vector3f;
 
-import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class Node implements Serializable {
+@RegisterNode
+public class Node {
     private Vector3f relativePosition = new Vector3f();
 
     private Set<Node> children;

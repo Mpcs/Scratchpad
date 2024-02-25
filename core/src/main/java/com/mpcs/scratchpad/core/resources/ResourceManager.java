@@ -5,7 +5,6 @@ import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import com.mpcs.scratchpad.core.resources.obj.ObjFile;
 import com.mpcs.scratchpad.core.resources.obj.VertexDataFormat;
 import com.mpcs.scratchpad.core.scene.Scene;
-import com.mpcs.scratchpad.core.scene.ogscene.OGScene;
 
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
@@ -58,9 +57,9 @@ public class ResourceManager {
 	}
 
 	public Scene loadScene(String sceneName) {
-		SceneFileParser sceneFileParser = new SceneFileParser(projectDirectory.resolve(sceneName));
-		return new OGScene();
-		//return sceneFileParser.toScene();// new OGScene();
+		SceneFileParser sceneFileParser = new SceneFileParserImpl2(projectDirectory.resolve(sceneName));
+		//return new OGScene();
+		return sceneFileParser.toScene();// new OGScene();
 	}
 
 	public Image getResourceImage(String resourceName) throws IOException {
