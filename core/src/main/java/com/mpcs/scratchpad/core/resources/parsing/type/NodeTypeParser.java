@@ -1,24 +1,31 @@
 package com.mpcs.scratchpad.core.resources.parsing.type;
 
 import com.mpcs.scratchpad.core.registries.Registries;
-import com.mpcs.scratchpad.core.resources.parsing.annotations.TypeParsers;
+import com.mpcs.scratchpad.core.registries.annotation.Registry;
+import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import com.mpcs.scratchpad.core.scene.nodes.Node;
-import com.mpcs.scratchpad.core.scene.nodes.annotation.RegisterNode;
+
 
 import java.util.List;
 import java.util.Set;
 
-@TypeParsers
+@Registry(TypeParser.class)
 public class NodeTypeParser implements TypeParser<Class<? extends Node>>{
     @Override
     public Class<? extends Node> parse(String typeName) throws TypeParseException {
-        Set<Class<?>> nodeClasses = Registries.getRegistryTypes(RegisterNode.class);
+        Set<Class<? extends Node>> nodeClasses = Registries.getRegistryTypes(Node.class);
 
-        List<Class<?>> list = nodeClasses.stream().filter(val -> val.getName().endsWith(typeName)).toList();
+        List<Class<? extends Node>> list = nodeClasses.stream().filter(val -> val.getName().endsWith(typeName)).toList();
         if (list.isEmpty()) {
             throw new TypeParseException("Type not found: " + typeName);
         }
 
-        return (Class<? extends Node>) list.get(0);
+        return list.get(0);
     }
+
+    @Override
+    public boolean matchesType(Class<?> clazz) {
+        return clazz.isAssignableFrom(Node.class);
+    }
+
 }

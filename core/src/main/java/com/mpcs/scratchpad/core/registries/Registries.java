@@ -11,23 +11,24 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Registries {
 
     private static Map<Class<?>, Set<Class<?>>> loadedTypeRegistries = new HashMap<>();
     private static Map<Class<?>, Set<Object>> loadedInstanceRegistries = new HashMap<>();
 
-    public static Set<Class<?>> getRegistryTypes(Class<?> registryType) {
+    public static <T> Set<Class<? extends T>> getRegistryTypes(Class<T> registryType) {
         return getOrLoadTypeRegistry(registryType);
     }
 
-    private static Set<Class<?>> getOrLoadTypeRegistry(Class<?> registryType) {
+    private static <T> Set<Class<? extends T>> getOrLoadTypeRegistry(Class<T> registryType) {
         if (loadedTypeRegistries.containsKey(registryType)) {
-            return loadedTypeRegistries.get(registryType);
+            return loadedTypeRegistries.get(registryType).stream().map(clazz -> (Class<? extends T>)clazz).collect(Collectors.toSet());
         }
 
         loadedTypeRegistries.put(registryType, loadTypeRegistry(registryType));
-        return loadedTypeRegistries.get(registryType);
+        return loadedTypeRegistries.get(registryType).stream().map(clazz -> (Class<? extends T>)clazz).collect(Collectors.toSet());
     }
 
     private static Set<Class<?>> loadTypeRegistry(Class<?> registryType) {
@@ -49,25 +50,25 @@ public class Registries {
         }
     }
 
-    public static Set<Object> getRegistryInstances(Class<?> registryType) {
+    public static <T> Set<T> getRegistryInstances(Class<T> registryType) {
         return getOrLoadInstanceRegistry(registryType);
     }
 
-    private static Set<Object> getOrLoadInstanceRegistry(Class<?> registryType) {
+    private static <T> Set<T> getOrLoadInstanceRegistry(Class<T> registryType) {
         if (loadedInstanceRegistries.containsKey(registryType)) {
-            return loadedInstanceRegistries.get(registryType);
+            return (Set<T>) loadedInstanceRegistries.get(registryType);
         }
 
-        loadedInstanceRegistries.put(registryType, loadInstanceRegistry(registryType));
-        return loadedInstanceRegistries.get(registryType);
+        loadedInstanceRegistries.put(registryType, loadInstanceRegistry(registryType).stream().map(obj -> (Object) obj).collect(Collectors.toSet()));
+        return (Set<T>) loadedInstanceRegistries.get(registryType);
     }
 
-    private static Set<Object> loadInstanceRegistry(Class<?> registryType) {
-        Set<Class<?>> types = getOrLoadTypeRegistry(registryType);
-        Set<Object> instances = new HashSet<>();
-        for (Class<?> type : types) {
+    private static <T> Set<T> loadInstanceRegistry(Class<T> registryType) {
+        Set<Class<? extends T>> types = getOrLoadTypeRegistry(registryType);
+        Set<T> instances = new HashSet<>();
+        for (Class<? extends T> type : types) {
             try {
-                Object instance = type.getDeclaredConstructor().newInstance();
+                T instance = type.getDeclaredConstructor().newInstance();
                 instances.add(instance);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e) {

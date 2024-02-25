@@ -12,14 +12,11 @@ public class TypeParsers {
     private TypeParsers(){}
 
     public static <T> T parse(String stringValue, Class<T> parameterType) throws TypeParseException {
-        Set<Object> parsers = Registries.getRegistryInstances(com.mpcs.scratchpad.core.resources.parsing.annotations.TypeParsers.class);
-        for (Object object : parsers) {
-            if (object instanceof TypeParser<> parser) {
-                    try {
-                        return (T) parser.parse(stringValue);
-                    } catch (TypeParseException e) {
-                        continue;
-                    }
+        Set<TypeParser> parsers = Registries.getRegistryInstances(TypeParser.class);
+
+        for (TypeParser<?> typeParser : parsers) {
+            if (typeParser.matchesType(parameterType)) {
+                return (T)typeParser.parse(stringValue);
             }
         }
         throw new TypeParseException("No parser found for type: " + parameterType.getTypeName());

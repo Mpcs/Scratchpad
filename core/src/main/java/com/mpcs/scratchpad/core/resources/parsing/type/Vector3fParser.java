@@ -1,9 +1,10 @@
 package com.mpcs.scratchpad.core.resources.parsing.type;
 
-import com.mpcs.scratchpad.core.resources.parsing.annotations.TypeParsers;
+import com.mpcs.scratchpad.core.registries.annotation.Registry;
+import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import org.joml.Vector3f;
 
-@TypeParsers
+@Registry(TypeParser.class)
 public class Vector3fParser implements TypeParser<Vector3f>{
     @Override
     public Vector3f parse(String string) throws TypeParseException {
@@ -25,4 +26,10 @@ public class Vector3fParser implements TypeParser<Vector3f>{
 
 
     }
+
+    @Override
+    public boolean matchesType(Class<?> clazz) {
+        return clazz.isAssignableFrom(Vector3f.class);
+    }
+
 }

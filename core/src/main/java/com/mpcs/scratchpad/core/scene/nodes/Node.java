@@ -1,7 +1,7 @@
 package com.mpcs.scratchpad.core.scene.nodes;
 
+import com.mpcs.scratchpad.core.registries.annotation.Registry;
 import com.mpcs.scratchpad.core.scene.NodeException;
-import com.mpcs.scratchpad.core.scene.nodes.annotation.RegisterNode;
 import org.joml.Vector3f;
 
 import java.util.LinkedHashSet;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-@RegisterNode
+@Registry(Node.class)
 public class Node {
     private Vector3f relativePosition = new Vector3f();
 
