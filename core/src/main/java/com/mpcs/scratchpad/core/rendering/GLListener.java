@@ -7,12 +7,15 @@ import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
+import com.mpcs.scratchpad.core.EngineThread;
 import com.mpcs.scratchpad.core.rendering.shader.Shader;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderCompileException;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgramLinkException;
+import com.mpcs.scratchpad.core.scene.Scene;
 import com.mpcs.scratchpad.core.scene.nodes.Model3DNode;
 import com.mpcs.scratchpad.core.scene.nodes.Node;
+import com.mpcs.scratchpad.core.simulation.Simulation;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
@@ -59,17 +62,20 @@ public class GLListener implements GLEventListener {
             """;
 
     ShaderProgram shaderProgram1;
-    public Context context;
-    private final Engine engine;
-
-    public GLListener() {
-        this.context = Context.get();
-        this.engine = context.getEngine();
+    private Context context;
+    public GLListener(Context context) {
+        this.context = context;
     }
+
+    Engine engine;
 
     @Override
     public void init(GLAutoDrawable drawable) {
         Thread.currentThread().setName("EngineRenderThread(Window)");
+        engine = context.getInstanceOf(Engine.class);
+        Context.threadEngineUuid.set(engine.getUuid());
+        //EngineThread engineThread = (EngineThread) Thread.currentThread();
+        //engineThread.setUuid(engine.getUuid());
         GL3 gl = drawable.getGL().getGL3();
 
         Shader vertexShader = Shader.createVertexShader(vertexShaderCode);
@@ -118,16 +124,21 @@ public class GLListener implements GLEventListener {
         shaderProgram1.setUniform3f(gl, "offset", (float) Math.sin(0), 0.4f, 0.0f);
         shaderProgram1.setUniform1f(gl, "mixVal", (float) Math.sin(0));
 
-        Camera camera = context.getSimulation().getScene().camera;
+        Scene scene = Context.get(Simulation.class).getScene();
+        if (scene == null) { // TODO: DIRRRTY
+            return;
+        }
+
+        Camera camera = scene.camera;
 
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.lookAt(camera.position, camera.position.add(camera.front, new Vector3f()), camera.up);
 
         Matrix4f projectionMatrix = new Matrix4f();
-        GLWindow glWindow = Context.get().getRenderer().getGlWindow();
+        GLWindow glWindow = Context.get(Renderer.class).getGlWindow();
         projectionMatrix.perspective((float) Math.toRadians(45), (float) glWindow.getWidth() / glWindow.getHeight(), 0.1f, 100.0f);
 
-        List<Node> elements = context.getSimulation().getScene().getAllNodes();
+        List<Node> elements = Context.get(Simulation.class).getScene().getAllNodes();
 
         shaderProgram1.setUniformMatrix4fv(gl, "view", viewMatrix);
         shaderProgram1.setUniformMatrix4fv(gl, "projection", projectionMatrix);

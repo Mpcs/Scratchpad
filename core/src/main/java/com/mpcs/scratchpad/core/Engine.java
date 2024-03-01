@@ -14,32 +14,39 @@ import com.mpcs.scratchpad.core.resources.ResourceManager;
 import com.mpcs.scratchpad.core.simulation.Simulation;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class Engine {
-    private final Thread simulationThread;
+    private final EngineThread simulationThread;
     private final Context context;
+
+    private final UUID uuid;
 
     public Engine(String projectPath, boolean withRendering) throws IOException{
         this(new ResourceManager(projectPath), withRendering);
     }
 
     public Engine(ResourceManager resourceManager, boolean withRendering) {
+        uuid = UUID.randomUUID();
+
         context = Context.createContext(this);
 
-        context.setResourceManager(resourceManager);
-        context.setInputManager(new InputManager());
-        if (withRendering) {
-            context.setRenderer(new Renderer());
-        }
-        context.setSimulation(new Simulation());
+        context.put(ResourceManager.class, resourceManager);
+        context.put(InputManager.class, new InputManager());
 
-        simulationThread = new Thread(context.getSimulation(), "EngineUpdateThread");
+        if (withRendering) {
+            context.put(Renderer.class, new Renderer(context));
+        }
+        context.put(Simulation.class, new Simulation());
+
+        simulationThread = new EngineThread(context.getInstanceOf(Simulation.class), "EngineUpdateThread");
+        simulationThread.setUuid(uuid);
         simulationThread.start();
     }
 
     public void stop() {
-        context.getSimulation().running.set(false);
-        context.getRenderer().stop();
+        context.getInstanceOf(Simulation.class).running.set(false);
+        context.getInstanceOf(Renderer.class).stop();
     }
 
     public boolean isRunning() {
@@ -48,5 +55,9 @@ public class Engine {
 
     public Context getContext() {
         return context;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 }

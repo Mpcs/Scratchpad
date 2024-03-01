@@ -5,72 +5,63 @@ import com.mpcs.scratchpad.core.rendering.Renderer;
 import com.mpcs.scratchpad.core.simulation.Simulation;
 import com.mpcs.scratchpad.core.resources.ResourceManager;
 
+import java.rmi.AccessException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class Context {
-    private static Context instance;
+    public static final ThreadLocal<UUID> threadEngineUuid = new ThreadLocal<>();
+
+    private static final Map<String, Context> instances = new HashMap<>(); // Engine UUID -> Instance
 
     private final Engine engine;
-    private Renderer renderer;
-    private Simulation simulation;
-    private InputManager inputManager;
-    private ResourceManager resourceManager;
+    private final Map<Class<?>, Object> contextElements;
+
 
     private Context(Engine engine) {
         this.engine = engine;
+        this.contextElements = new HashMap<>();
     }
 
-    static Context createContext(Engine engine) {
-        if (instance != null) {
-            throw new UnsupportedOperationException("Context already exists");
+    void put(Class<?> clazz,Object o) {
+        if (contextElements.containsKey(clazz)) {
+            throw new UnsupportedOperationException("Trying to reassign " + clazz + " in context.");
         }
-        instance = new Context(engine);
-        return instance;
+        contextElements.put(clazz, o);
+    }
+
+    public <T> T getInstanceOf(Class<T> clazz) {
+        if (!contextElements.containsKey(clazz)) {
+            throw new RuntimeException("Nothing registered for type " + clazz.getName());
+        }
+        return (T) contextElements.get(clazz);
+    }
+
+
+    static Context createContext(Engine engine) {
+        String engineUuid = engine.getUuid().toString();
+        if (instances.containsKey(engineUuid)) {
+            throw new UnsupportedOperationException("Context already exists for this engine instance");
+        }
+
+        Context newInstance = new Context(engine);
+        newInstance.put(Engine.class, engine);
+        instances.put(engineUuid, newInstance);
+        return newInstance;
     }
 
     public static Context get() {
-        return instance;
+        String uuid = threadEngineUuid.get().toString();
+        if (!instances.containsKey(uuid)) {
+            throw new RuntimeException("No context for engine UUID: " + uuid + ". Accessed from thread " + Thread.currentThread().getName());
+        }
+        return instances.get(uuid);
     }
 
-    void setResourceManager(ResourceManager resourceManager) {
-        if (this.resourceManager != null)
-            throw new UnsupportedOperationException("Trying to overwrite ResourceManager");
-        this.resourceManager = resourceManager;
-    }
-
-    public ResourceManager getResourceManager() {
-        return resourceManager;
-    }
-
-    void setRenderer(Renderer renderer) {
-        if (this.renderer != null)
-            throw new UnsupportedOperationException("Trying to overwrite Renderer");
-
-        this.renderer = renderer;
-    }
-
-    public Renderer getRenderer() {
-        return renderer;
-    }
-
-    void setSimulation(Simulation simulation) {
-        if (this.simulation != null)
-            throw new UnsupportedOperationException("Trying to overwrite Simulation");
-
-        this.simulation = simulation;
-    }
-
-    public Simulation getSimulation() {
-        return simulation;
-    }
-
-    void setInputManager(InputManager inputManager) {
-        if (this.inputManager != null)
-            throw new UnsupportedOperationException("Trying to overwrite InputManager");
-
-        this.inputManager = inputManager;
-    }
-
-    public InputManager getInputManager() {
-        return inputManager;
+    public static <T> T get(Class<T> clazz) {
+        Context contextInstance = get();
+        return contextInstance.getInstanceOf(clazz);
     }
 
     public Engine getEngine() {

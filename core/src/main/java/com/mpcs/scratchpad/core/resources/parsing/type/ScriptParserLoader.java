@@ -18,7 +18,7 @@ public class ScriptParserLoader implements TypeParser<Class<?>> {
     @Override
     public Class<?> parse(String string) throws TypeParseException {
         if (string.isEmpty()) return null;
-        Class<?> clazz = Context.get().getResourceManager().loadClass(string);
+        Class<?> clazz = Context.get(ResourceManager.class).loadClass(string);
         if (clazz == null) {
             throw new TypeParseException("Error parsing class. //TODO PLS");
         }

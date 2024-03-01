@@ -9,6 +9,7 @@ import com.jogamp.opengl.*;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
+import com.mpcs.scratchpad.core.input.InputManager;
 import com.mpcs.scratchpad.core.rendering.shader.Shader;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderCompileException;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
@@ -26,17 +27,16 @@ public class Renderer {
 
     private final GLWindow window;
     private final FPSAnimator animator;
-    public Renderer() {
-        Context context = Context.get();
+    public Renderer(Context context) {
         GLProfile glProfile = GLProfile.getDefault();
         GLCapabilities glCapabilities = new GLCapabilities(glProfile);
         Display jfxNewtDisplay = NewtFactory.createDisplay(null, false);
-        GLListener glListener = new GLListener();
+        GLListener glListener = new GLListener(context);
 
         window = GLWindow.create(NewtFactory.createScreen(jfxNewtDisplay, 0), glCapabilities);
         window.addGLEventListener(glListener);
-        window.addKeyListener(context.getInputManager());
-        window.addMouseListener(context.getInputManager());
+        window.addKeyListener(context.getInstanceOf(InputManager.class));
+        window.addMouseListener(context.getInstanceOf(InputManager.class));
         window.addWindowListener(new CloseWindowListener(context.getEngine()));
 
         animator = new FPSAnimator(window, TARGET_FPS);
