@@ -11,9 +11,9 @@ import java.util.Set;
 
 @Registry(Node.class)
 public class Node {
-    private Vector3f relativePosition = new Vector3f();
+    private final Vector3f relativePosition = new Vector3f();
 
-    private Set<Node> children;
+    private final Set<Node> children;
     private Node parent;
 
     public Node() {

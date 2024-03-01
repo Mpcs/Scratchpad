@@ -4,9 +4,9 @@ import java.nio.file.Path;
 
 
 public class Project {
-	private Path projectPath;
-	private String projectName;
-	private String initialSceneName;
+	private final Path projectPath;
+	private final String projectName;
+	private final String initialSceneName;
 
 	public Project(Path projectPath, String projectName, String initialSceneName) {	
 		this.projectPath = projectPath;

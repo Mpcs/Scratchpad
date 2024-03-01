@@ -5,7 +5,6 @@ import com.mpcs.scratchpad.core.registries.annotation.Registry;
 import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
 import com.mpcs.scratchpad.core.resources.Image;
-import com.mpcs.scratchpad.core.resources.parsing.type.TypeParser;
 import org.joml.Vector3f;
 
 @Registry(Node.class)

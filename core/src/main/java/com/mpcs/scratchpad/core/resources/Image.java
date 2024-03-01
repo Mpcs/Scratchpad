@@ -2,11 +2,8 @@ package com.mpcs.scratchpad.core.resources;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import com.mpcs.scratchpad.core.Context;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 

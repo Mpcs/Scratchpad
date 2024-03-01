@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ObjFile {
-	private List<Vector3f> vertexPositions = new ArrayList<>();
-	private List<Vector2f> vertexTextureNormals = new ArrayList<>();
-	private List<Vector3f> vertexNormals = new ArrayList<>();
-	private List<ObjFace> faces = new ArrayList<>();
+	private final List<Vector3f> vertexPositions = new ArrayList<>();
+	private final List<Vector2f> vertexTextureNormals = new ArrayList<>();
+	private final List<Vector3f> vertexNormals = new ArrayList<>();
+	private final List<ObjFace> faces = new ArrayList<>();
 
 	private ObjFile() {
 

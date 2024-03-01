@@ -3,7 +3,6 @@ package com.mpcs.scratchpad.core.resources.parsing;
 import com.mpcs.scratchpad.core.resources.parsing.type.TypeParseException;
 import com.mpcs.scratchpad.core.resources.parsing.type.TypeParser;
 
-import java.text.ParseException;
 import java.util.AbstractMap;
 import java.util.Map;
 import java.util.regex.Pattern;

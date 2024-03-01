@@ -63,7 +63,7 @@ public class GLListener implements GLEventListener {
             """;
 
     ShaderProgram shaderProgram1;
-    private Context context;
+    private final Context context;
     public GLListener(Context context) {
         this.context = context;
     }
@@ -75,8 +75,6 @@ public class GLListener implements GLEventListener {
         Thread.currentThread().setName("EngineRenderThread(Window)");
         engine = context.getEngineInstance();
         Context.threadEngineUuid.set(engine.getUuid());
-        //EngineThread engineThread = (EngineThread) Thread.currentThread();
-        //engineThread.setUuid(engine.getUuid());
         GL3 gl = drawable.getGL().getGL3();
 
         Shader vertexShader = Shader.createVertexShader(vertexShaderCode);
@@ -120,7 +118,7 @@ public class GLListener implements GLEventListener {
     }
     @Override
     public void dispose(GLAutoDrawable drawable) {
-
+        // Nothing needed for now
     }
 
     @Override
@@ -135,9 +133,6 @@ public class GLListener implements GLEventListener {
         shaderProgram1.setUniform1f(gl, "mixVal", (float) Math.sin(0));
 
         Scene scene = Context.get(Simulation.class).getScene();
-        //if (scene == null) { // TODO: DIRRRTY
-        //    return;
-        //}
 
         Camera camera = scene.camera;
 
@@ -168,5 +163,6 @@ public class GLListener implements GLEventListener {
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+        // Nothing needed for now
     }
 }

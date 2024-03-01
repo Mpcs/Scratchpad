@@ -25,7 +25,7 @@ public class EngineBuilder {
         return this;
     }
 
-    public Engine create(String projectPath) throws EngineCreationException, IOException {
+    public Engine create(String projectPath) throws EngineCreationException {
         return new Engine(services, projectPath);
     }
 

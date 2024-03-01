@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SceneFileParser {
-    private Path path;
+    private final Path path;
 
     LineParser nodeLineParser;
     LineParser attributeLineParser;
@@ -95,10 +95,8 @@ public class SceneFileParser {
                 //System.out.println(line);
             }
 
-        } catch (IOException | NoSuchMethodException | InvocationTargetException |
-                 InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (TypeParseException e) {
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | InstantiationException |
+                 IllegalAccessException | TypeParseException e) {
             throw new RuntimeException(e);
         }
 

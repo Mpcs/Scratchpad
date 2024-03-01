@@ -3,7 +3,6 @@ package com.mpcs.scratchpad.core;
 import com.mpcs.scratchpad.core.resources.ResourceManager;
 import com.mpcs.scratchpad.core.service.EngineService;
 
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;

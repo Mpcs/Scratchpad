@@ -31,7 +31,7 @@ public class ResourceManager implements EngineService {
 
 	private Path projectDirectory;
 	private Project currentProject;
-	private String currentProjectPath;
+	private final String currentProjectPath;
 	public ResourceManager(String projectPath) {
 		this.currentProjectPath = projectPath;
 	}
@@ -95,17 +95,17 @@ public class ResourceManager implements EngineService {
 	public Class<?> loadClass(String filePath) {
 		Path fileResolvedPath = projectDirectory.resolve(filePath);
 		File file = fileResolvedPath.toFile();
-		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
+		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 		JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
 		StandardJavaFileManager fileManager = javaCompiler.getStandardFileManager(diagnostics, null, null);
 
-		List<String> optionList = new ArrayList<String>();
+		List<String> optionList = new ArrayList<>();
 		optionList.add("-classpath");
 		optionList.add(System.getProperty("java.class.path") + File.pathSeparator + "dist/InlineCompiler.jar");
 		optionList.add("-d");
 		optionList.add(projectDirectory.resolve("build/").toString());
 		Iterable<? extends JavaFileObject> compilationUnit
-				= fileManager.getJavaFileObjectsFromFiles(Arrays.asList(file));
+				= fileManager.getJavaFileObjectsFromFiles(List.of(file));
 		JavaCompiler.CompilationTask task = javaCompiler.getTask(
 				null,
 				fileManager,

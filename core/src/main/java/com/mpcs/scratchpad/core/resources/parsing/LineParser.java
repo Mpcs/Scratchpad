@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class LineParser {
 
     String prefix = "";
-    private List<LineParameter> parameters = new ArrayList<>();
+    private final List<LineParameter> parameters = new ArrayList<>();
     private String linePrefix = "";
 
     public LineParameter parameter(String parameterName) {
@@ -38,11 +38,7 @@ public class LineParser {
             Map.Entry<String, Object> parse = fileSpecParameter.parse(line);
             result.put(parse.getKey(), parse.getValue());
 
-            if (parse.getValue() == null) {
-                continue;
-            }
-
-            if (parse.getValue() instanceof String s && s.isEmpty()) {
+            if (parse.getValue() == null || parse.getValue() instanceof String s && s.isEmpty()) {
                 continue;
             }
 

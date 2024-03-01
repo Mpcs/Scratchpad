@@ -3,11 +3,9 @@ package com.mpcs.scratchpad.core.rendering.mesh;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
 import com.mpcs.scratchpad.core.resources.Image;
 
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -42,11 +40,8 @@ public class ArrayMesh3D implements Mesh3D {
         // positions
         gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, stride, 0);
         gl.glEnableVertexAttribArray(0);
-        // colors
-        //gl.glVertexAttribPointer(1, 3, GL.GL_FLOAT, false, stride, 3*Float.BYTES);
-        //gl.glEnableVertexAttribArray(1);
         // Texture UVs
-        gl.glVertexAttribPointer(1, 2, GL.GL_FLOAT, false, stride, 3*Float.BYTES);
+        gl.glVertexAttribPointer(1, 2, GL.GL_FLOAT, false, stride, 3L*Float.BYTES);
         gl.glEnableVertexAttribArray(1);
 
         gl.glBindVertexArray(0);

@@ -10,13 +10,13 @@ public class MyImpreciseLoop extends SimulationLoop{
     private static final int FRAMES_PER_SEC = 60;
     private static final double MILIS_PER_FRAME = (1000.0/FRAMES_PER_SEC); // 1000 milliseconds per second
 
-    private Queue<Double> lastFrameTimes = new LimitedQueue<>(FRAMES_PER_SEC);
+    private final Queue<Double> lastFrameTimes = new LimitedQueue<>(FRAMES_PER_SEC);
 
     public MyImpreciseLoop(Consumer<Double> updateFunction) {
         super(updateFunction);
     }
 
-    private double lastTickTime = 0;
+    private final double lastTickTime = 0;
 
     @Override
     public void tickAndWait() {

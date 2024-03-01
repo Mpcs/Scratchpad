@@ -13,7 +13,7 @@ import java.util.List;
 
 public class InputManager implements EngineService, KeyListener, MouseListener {
 
-    private List<Short> pressedKeys = new ArrayList<>();
+    private final List<Short> pressedKeys = new ArrayList<>();
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -33,55 +33,62 @@ public class InputManager implements EngineService, KeyListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        // Nothing implemented for now
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        // Nothing implemented for now
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        // Nothing implemented for now
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        // Nothing implemented for now
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        // Nothing implemented for now
 
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        // Nothing implemented for now
+
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        // Nothing implemented for now
 
     }
 
     @Override
     public void mouseWheelMoved(MouseEvent e) {
+        // Nothing implemented for now
 
     }
 
     @Override
     public void init(Context context) {
-
+        // Not needed for now
     }
 
     @Override
     public void start() {
+        // Not needed for now
 
     }
 
     @Override
     public void stop() {
+        // Not needed for now
 
     }
 

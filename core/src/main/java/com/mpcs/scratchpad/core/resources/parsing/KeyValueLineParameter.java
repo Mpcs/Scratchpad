@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class KeyValueLineParameter extends LineParameter {
 
-    private String separator;
+    private final String separator;
 
     public KeyValueLineParameter(LineParser parentLine, String separator) {
         super(parentLine, null);
@@ -22,8 +22,4 @@ public class KeyValueLineParameter extends LineParameter {
         return new AbstractMap.SimpleEntry<>(keyvalue[0], keyvalue[1]);
     }
 
-    @Override
-    public String trim(String line) {
-        return super.trim(line);
-    }
 }

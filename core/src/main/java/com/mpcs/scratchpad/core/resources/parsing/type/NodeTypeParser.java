@@ -2,7 +2,6 @@ package com.mpcs.scratchpad.core.resources.parsing.type;
 
 import com.mpcs.scratchpad.core.registries.Registries;
 import com.mpcs.scratchpad.core.registries.annotation.Registry;
-import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import com.mpcs.scratchpad.core.scene.nodes.Node;
 
 
@@ -21,7 +20,7 @@ public class NodeTypeParser implements TypeParser<Class<? extends Node>>{
             throw new TypeParseException("Type not found: " + typeName);
         }
 
-        return list.get(0);
+        return list.getFirst();
     }
 
     @Override

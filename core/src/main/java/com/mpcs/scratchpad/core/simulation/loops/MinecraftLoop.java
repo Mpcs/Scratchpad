@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public class MinecraftLoop extends SimulationLoop {
 
-    private int targetTPS;
+    private final int targetTPS;
     double nanosecondsPerTick;
     long lastime = System.nanoTime();
     double deltaTime = 0;

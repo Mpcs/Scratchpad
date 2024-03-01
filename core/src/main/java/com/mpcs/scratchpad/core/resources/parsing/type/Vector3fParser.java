@@ -1,7 +1,6 @@
 package com.mpcs.scratchpad.core.resources.parsing.type;
 
 import com.mpcs.scratchpad.core.registries.annotation.Registry;
-import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import org.joml.Vector3f;
 
 @Registry(TypeParser.class)

@@ -18,7 +18,7 @@ public class Simulation implements EngineService, Runnable {
 
     private static final boolean DISPLAY_TPS = false;
 
-    private AtomicBoolean running = new AtomicBoolean(false);
+    private final AtomicBoolean running = new AtomicBoolean(false);
     private EngineThread thread;
 
     private Scene scene;

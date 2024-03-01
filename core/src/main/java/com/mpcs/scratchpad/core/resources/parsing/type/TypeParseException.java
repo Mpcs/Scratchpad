@@ -1,7 +1,5 @@
 package com.mpcs.scratchpad.core.resources.parsing.type;
 
-import org.joml.Vector3f;
-
 public class TypeParseException extends Exception{
 
     public TypeParseException(String message) {

@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 public class Registries {
 
-    private static Map<Class<?>, Set<Class<?>>> loadedTypeRegistries = new HashMap<>();
-    private static Map<Class<?>, Set<Object>> loadedInstanceRegistries = new HashMap<>();
+    private static final Map<Class<?>, Set<Class<?>>> loadedTypeRegistries = new HashMap<>();
+    private static final Map<Class<?>, Set<Object>> loadedInstanceRegistries = new HashMap<>();
 
     public static <T> Set<Class<? extends T>> getRegistryTypes(Class<T> registryType) {
         return getOrLoadTypeRegistry(registryType);
@@ -43,9 +43,7 @@ public class Registries {
                 line = reader.readLine();
             }
             return loadedClasses;
-        }catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        }catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

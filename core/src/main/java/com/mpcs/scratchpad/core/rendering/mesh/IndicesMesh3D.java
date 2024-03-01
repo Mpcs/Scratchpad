@@ -3,11 +3,9 @@ package com.mpcs.scratchpad.core.rendering.mesh;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
 import com.mpcs.scratchpad.core.resources.Image;
 
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -52,10 +50,10 @@ public class IndicesMesh3D implements Mesh3D {
         gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, stride, 0);
         gl.glEnableVertexAttribArray(0);
         // colors
-        gl.glVertexAttribPointer(1, 3, GL.GL_FLOAT, false, stride, 3*Float.BYTES);
+        gl.glVertexAttribPointer(1, 3, GL.GL_FLOAT, false, stride, 3L*Float.BYTES);
         gl.glEnableVertexAttribArray(1);
 
-        gl.glVertexAttribPointer(2, 2, GL.GL_FLOAT, false, stride, 6*Float.BYTES);
+        gl.glVertexAttribPointer(2, 2, GL.GL_FLOAT, false, stride, 6L*Float.BYTES);
         gl.glEnableVertexAttribArray(2);
 
         gl.glBindVertexArray(0);

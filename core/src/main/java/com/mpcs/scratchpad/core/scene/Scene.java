@@ -6,7 +6,7 @@ import com.mpcs.scratchpad.core.scene.nodes.Node;
 import java.util.List;
 
 public class Scene {
-    private Node rootNode;
+    private final Node rootNode;
     public Camera camera;
 
     public Scene(Node rootNode) {
