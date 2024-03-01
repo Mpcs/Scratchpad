@@ -1,14 +1,8 @@
 package com.mpcs.scratchpad.core;
 
-import com.mpcs.scratchpad.core.input.InputManager;
-import com.mpcs.scratchpad.core.rendering.Renderer;
-import com.mpcs.scratchpad.core.simulation.Simulation;
-import com.mpcs.scratchpad.core.resources.ResourceManager;
+import com.mpcs.scratchpad.core.service.EngineService;
 
-import java.rmi.AccessException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Context {
     public static final ThreadLocal<UUID> threadEngineUuid = new ThreadLocal<>();
@@ -16,7 +10,7 @@ public class Context {
     private static final Map<String, Context> instances = new HashMap<>(); // Engine UUID -> Instance
 
     private final Engine engine;
-    private final Map<Class<?>, Object> contextElements;
+    private final Map<Class<? extends EngineService>, EngineService> contextElements;
 
 
     private Context(Engine engine) {
@@ -24,14 +18,14 @@ public class Context {
         this.contextElements = new HashMap<>();
     }
 
-    void put(Class<?> clazz,Object o) {
+    void put(Class<? extends EngineService> clazz, EngineService o) {
         if (contextElements.containsKey(clazz)) {
             throw new UnsupportedOperationException("Trying to reassign " + clazz + " in context.");
         }
         contextElements.put(clazz, o);
     }
 
-    public <T> T getInstanceOf(Class<T> clazz) {
+    public <T extends EngineService> T getInstanceOf(Class<T> clazz) {
         if (!contextElements.containsKey(clazz)) {
             throw new RuntimeException("Nothing registered for type " + clazz.getName());
         }
@@ -46,7 +40,6 @@ public class Context {
         }
 
         Context newInstance = new Context(engine);
-        newInstance.put(Engine.class, engine);
         instances.put(engineUuid, newInstance);
         return newInstance;
     }
@@ -59,12 +52,21 @@ public class Context {
         return instances.get(uuid);
     }
 
-    public static <T> T get(Class<T> clazz) {
+    public static <T extends EngineService> T get(Class<T> clazz) {
         Context contextInstance = get();
         return contextInstance.getInstanceOf(clazz);
     }
 
-    public Engine getEngine() {
+    public Engine getEngineInstance() {
         return engine;
+    }
+
+    public static Engine getEngine() {
+        Context contextInstance = get();
+        return contextInstance.getEngineInstance();
+    }
+
+    public List<EngineService> getAllSortedByPriority() {
+        return contextElements.values().stream().sorted(Comparator.comparing(EngineService::getPriority)).toList();
     }
 }

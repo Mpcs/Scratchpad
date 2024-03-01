@@ -49,8 +49,8 @@ public class SceneFileParser {
                     Class<? extends Node> nodeClass = (Class<? extends Node>) parameters.get("type");
                     Class<?> scriptClass = (Class<?>) parameters.get("script");
                     if (scriptClass != null) {
-                        System.out.println(scriptClass.getSuperclass().getName());
-                        System.out.println(nodeClass.getName());
+                        //System.out.println(scriptClass.getSuperclass().getName());
+                        //System.out.println(nodeClass.getName());
                         if (scriptClass.getSuperclass().equals(nodeClass)) {
                             nodeClass = (Class<? extends Node>) scriptClass;
                         } else {
@@ -92,7 +92,7 @@ public class SceneFileParser {
                         setterMethod.invoke(currentNode, attrValue);
                     }
                 }
-                System.out.println(line);
+                //System.out.println(line);
             }
 
         } catch (IOException | NoSuchMethodException | InvocationTargetException |

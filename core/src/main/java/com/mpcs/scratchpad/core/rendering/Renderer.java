@@ -9,25 +9,18 @@ import com.jogamp.opengl.*;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
+import com.mpcs.scratchpad.core.service.EngineService;
+import com.mpcs.scratchpad.core.service.ServicePriority;
 import com.mpcs.scratchpad.core.input.InputManager;
-import com.mpcs.scratchpad.core.rendering.shader.Shader;
-import com.mpcs.scratchpad.core.rendering.shader.ShaderCompileException;
-import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
-import com.mpcs.scratchpad.core.rendering.shader.ShaderProgramLinkException;
-import com.mpcs.scratchpad.core.scene.nodes.Model3DNode;
-import com.mpcs.scratchpad.core.scene.nodes.Node;
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
 
-import java.util.List;
-
-public class Renderer {
+public class Renderer implements EngineService {
 
     private static final int TARGET_FPS = 60;
 
-    private final GLWindow window;
-    private final FPSAnimator animator;
-    public Renderer(Context context) {
+    private GLWindow window;
+    private FPSAnimator animator;
+    @Override
+    public void init(Context context) {
         GLProfile glProfile = GLProfile.getDefault();
         GLCapabilities glCapabilities = new GLCapabilities(glProfile);
         Display jfxNewtDisplay = NewtFactory.createDisplay(null, false);
@@ -37,15 +30,25 @@ public class Renderer {
         window.addGLEventListener(glListener);
         window.addKeyListener(context.getInstanceOf(InputManager.class));
         window.addMouseListener(context.getInstanceOf(InputManager.class));
-        window.addWindowListener(new CloseWindowListener(context.getEngine()));
+        window.addWindowListener(new CloseWindowListener(context.getEngineInstance()));
 
         animator = new FPSAnimator(window, TARGET_FPS);
         animator.start();
         animator.setUpdateFPSFrames(1, null);
     }
 
+    @Override
+    public void start() {
+
+    }
+
     public void stop() {
         animator.stop();
+    }
+
+    @Override
+    public ServicePriority getPriority() {
+        return ServicePriority.MAIN;
     }
 
     public GLWindow getGlWindow() {

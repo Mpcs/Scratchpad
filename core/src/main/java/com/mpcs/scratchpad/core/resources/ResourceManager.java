@@ -1,5 +1,8 @@
 package com.mpcs.scratchpad.core.resources;
 
+import com.mpcs.scratchpad.core.Context;
+import com.mpcs.scratchpad.core.service.EngineService;
+import com.mpcs.scratchpad.core.service.ServicePriority;
 import com.mpcs.scratchpad.core.rendering.mesh.ArrayMesh3D;
 import com.mpcs.scratchpad.core.rendering.mesh.Mesh3D;
 import com.mpcs.scratchpad.core.resources.obj.ObjFile;
@@ -22,14 +25,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class ResourceManager {
+public class ResourceManager implements EngineService {
 
 	public static final String PROJECT_FILE_NAME = "project.scratchpad";
 
 	private Path projectDirectory;
 	private Project currentProject;
-	public ResourceManager(String projectPath) throws IOException {
-		loadProject(projectPath);
+	private String currentProjectPath;
+	public ResourceManager(String projectPath) {
+		this.currentProjectPath = projectPath;
 	}
 
 	public Project loadProject(String projectPath) throws IOException {
@@ -112,7 +116,7 @@ public class ResourceManager {
 
 		if (task.call()) {
 			/** Load and execute *************************************************************************************************/
-			System.out.println("Yipe");
+			//System.out.println("Yipe");
 			// Create a new custom class loader, pointing to the directory that contains the compiled
 			// classes, this should point to the top of the package structure!
 			try {
@@ -141,5 +145,29 @@ public class ResourceManager {
 			throw new RuntimeException(e);
 		}
 		return null;
+	}
+
+	@Override
+	public void init(Context context) {
+        try {
+            loadProject(currentProjectPath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+	@Override
+	public void start() {
+
+	}
+
+	@Override
+	public void stop() {
+
+	}
+
+	@Override
+	public ServicePriority getPriority() {
+		return ServicePriority.RESOURCES;
 	}
 }

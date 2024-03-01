@@ -1,56 +1,55 @@
 package com.mpcs.scratchpad.core;
 
-import com.jogamp.newt.Display;
-import com.jogamp.newt.NewtFactory;
-import com.jogamp.newt.event.WindowAdapter;
-import com.jogamp.newt.event.WindowEvent;
-import com.jogamp.newt.opengl.GLWindow;
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.util.FPSAnimator;
-import com.mpcs.scratchpad.core.input.InputManager;
-import com.mpcs.scratchpad.core.rendering.Renderer;
 import com.mpcs.scratchpad.core.resources.ResourceManager;
-import com.mpcs.scratchpad.core.simulation.Simulation;
+import com.mpcs.scratchpad.core.service.EngineService;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.UUID;
 
 public class Engine {
-    private final EngineThread simulationThread;
     private final Context context;
-
     private final UUID uuid;
 
-    public Engine(String projectPath, boolean withRendering) throws IOException{
-        this(new ResourceManager(projectPath), withRendering);
+    protected Engine(List<Class<? extends EngineService>> serviceClasses, String projectPath) throws EngineCreationException {
+        this(serviceClasses, new ResourceManager(projectPath));
     }
 
-    public Engine(ResourceManager resourceManager, boolean withRendering) {
+    protected Engine(List<Class<? extends EngineService>> serviceClasses, ResourceManager resourceManager) throws EngineCreationException {
         uuid = UUID.randomUUID();
 
         context = Context.createContext(this);
-
         context.put(ResourceManager.class, resourceManager);
-        context.put(InputManager.class, new InputManager());
 
-        if (withRendering) {
-            context.put(Renderer.class, new Renderer(context));
+        for (Class<? extends EngineService> serviceClass : serviceClasses) {
+            try {
+                Constructor<? extends EngineService> constructor = serviceClass.getConstructor();
+                context.put(serviceClass, constructor.newInstance());
+            } catch (NoSuchMethodException | IllegalAccessException | InstantiationException |
+                     InvocationTargetException e) {
+                throw new EngineCreationException(e);
+            }
         }
-        context.put(Simulation.class, new Simulation());
+    }
 
-        simulationThread = new EngineThread(context.getInstanceOf(Simulation.class), "EngineUpdateThread");
-        simulationThread.setUuid(uuid);
-        simulationThread.start();
+    public void start() {
+        List<EngineService> services = context.getAllSortedByPriority();
+        for (EngineService service : services) {
+            service.init(context);
+        }
+
+        for (EngineService service : services) {
+            service.start();
+        }
+
     }
 
     public void stop() {
-        context.getInstanceOf(Simulation.class).running.set(false);
-        context.getInstanceOf(Renderer.class).stop();
-    }
-
-    public boolean isRunning() {
-        return simulationThread.isAlive();
+        for (EngineService service : context.getAllSortedByPriority().reversed()) {
+            service.stop();
+        }
     }
 
     public Context getContext() {

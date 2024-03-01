@@ -6,6 +6,9 @@ import com.jogamp.newt.javafx.NewtCanvasJFX;
 import com.jogamp.newt.opengl.GLWindow;
 import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
+import com.mpcs.scratchpad.core.EngineBuilder;
+import com.mpcs.scratchpad.core.EngineCreationException;
+import com.mpcs.scratchpad.core.rendering.Renderer;
 import javafx.geometry.Bounds;
 
 import java.io.IOException;
@@ -19,12 +22,12 @@ public class EngineCanvas extends NewtCanvasJFX {
     public EngineCanvas() {
         super(null);
         try {
-            engine = new Engine("./testProject/", true);
-        } catch (IOException e) {
+            engine = new EngineBuilder().create("./testProject/");
+        } catch (IOException | EngineCreationException e) {
             throw new RuntimeException(e);
         }
 
-        GLWindow glWindow = Context.get().getRenderer().getGlWindow();
+        GLWindow glWindow = engine.getContext().getInstanceOf(Renderer.class).getGlWindow();
 
         this.setNEWTChild(glWindow);
 

@@ -1,4 +1,6 @@
-package com.mpcs.scratchpad.core;
+package com.mpcs.scratchpad.core.service;
+
+import com.mpcs.scratchpad.core.Context;
 
 import java.util.UUID;
 

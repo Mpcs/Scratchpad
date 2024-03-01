@@ -33,7 +33,7 @@ public class MinecraftLoop extends SimulationLoop {
             framesPassedInCurrentSecond++;
             deltaTime--;
             if(System.currentTimeMillis() - time >= 1000) { // every second
-                System.out.println("tps:" + framesPassedInCurrentSecond);
+                //System.out.println("tps:" + framesPassedInCurrentSecond);
                 time += 1000;
                 lastTPSValue = framesPassedInCurrentSecond;
                 framesPassedInCurrentSecond = 0;

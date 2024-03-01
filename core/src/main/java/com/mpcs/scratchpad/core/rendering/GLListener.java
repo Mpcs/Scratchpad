@@ -7,7 +7,6 @@ import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
-import com.mpcs.scratchpad.core.EngineThread;
 import com.mpcs.scratchpad.core.rendering.shader.Shader;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderCompileException;
 import com.mpcs.scratchpad.core.rendering.shader.ShaderProgram;
@@ -19,6 +18,8 @@ import com.mpcs.scratchpad.core.simulation.Simulation;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 public class GLListener implements GLEventListener {
@@ -72,7 +73,7 @@ public class GLListener implements GLEventListener {
     @Override
     public void init(GLAutoDrawable drawable) {
         Thread.currentThread().setName("EngineRenderThread(Window)");
-        engine = context.getInstanceOf(Engine.class);
+        engine = context.getEngineInstance();
         Context.threadEngineUuid.set(engine.getUuid());
         //EngineThread engineThread = (EngineThread) Thread.currentThread();
         //engineThread.setUuid(engine.getUuid());
@@ -104,6 +105,18 @@ public class GLListener implements GLEventListener {
 
         gl.glClearColor(0.2f, 0.3f, 0.5f, 1.0f);
         gl.glEnable(GL.GL_DEPTH_TEST);
+
+        waitForSimulationInit();
+    }
+
+    private void waitForSimulationInit() {
+        try (OutputStream outputStream = OutputStream.nullOutputStream()) {
+            while (!Context.get(Simulation.class).isRunning()) {
+                outputStream.write(0);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Override
     public void dispose(GLAutoDrawable drawable) {
@@ -112,9 +125,6 @@ public class GLListener implements GLEventListener {
 
     @Override
     public void display(GLAutoDrawable drawable) {
-        if(!engine.isRunning()) { // dirty fix for the render thread not stopping for one frame on javaFX window closing.
-            return;
-        }
         GL3 gl = drawable.getGL().getGL3();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         float secondsSinceStart = (float) drawable.getAnimator().getTotalFPSDuration() /1000;
@@ -125,9 +135,9 @@ public class GLListener implements GLEventListener {
         shaderProgram1.setUniform1f(gl, "mixVal", (float) Math.sin(0));
 
         Scene scene = Context.get(Simulation.class).getScene();
-        if (scene == null) { // TODO: DIRRRTY
-            return;
-        }
+        //if (scene == null) { // TODO: DIRRRTY
+        //    return;
+        //}
 
         Camera camera = scene.camera;
 

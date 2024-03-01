@@ -4,6 +4,8 @@ import com.jogamp.nativewindow.WindowClosingProtocol;
 import com.jogamp.newt.opengl.GLWindow;
 import com.mpcs.scratchpad.core.Context;
 import com.mpcs.scratchpad.core.Engine;
+import com.mpcs.scratchpad.core.EngineBuilder;
+import com.mpcs.scratchpad.core.EngineCreationException;
 import com.mpcs.scratchpad.core.rendering.Renderer;
 
 import java.io.IOException;
@@ -14,14 +16,16 @@ public class Main {
     public static final int DEFAULT_WINDOW_HEIGHT = 600;
     public static final String DEFAULT_WINDOW_TITLE = "Scratchpad Engine";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, EngineCreationException {
         if (args.length == 0) {
-            System.out.println("Provide project path as an argument.");
+            //System.out.println("Provide project path as an argument.");
             return;
         }
         String projectPath = args[0];
 
-        Engine engine = new Engine(projectPath, true); // TODO: Builder?
+
+        Engine engine = new EngineBuilder().create(projectPath);
+        engine.start();
         GLWindow glWindow = engine.getContext().getInstanceOf(Renderer.class).getGlWindow();
         glWindow.setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
         glWindow.setResizable(false);

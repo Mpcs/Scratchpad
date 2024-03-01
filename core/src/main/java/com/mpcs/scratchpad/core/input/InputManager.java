@@ -4,11 +4,14 @@ import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;
+import com.mpcs.scratchpad.core.Context;
+import com.mpcs.scratchpad.core.service.EngineService;
+import com.mpcs.scratchpad.core.service.ServicePriority;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputManager implements KeyListener, MouseListener {
+public class InputManager implements EngineService, KeyListener, MouseListener {
 
     private List<Short> pressedKeys = new ArrayList<>();
 
@@ -65,5 +68,25 @@ public class InputManager implements KeyListener, MouseListener {
     @Override
     public void mouseWheelMoved(MouseEvent e) {
 
+    }
+
+    @Override
+    public void init(Context context) {
+
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public ServicePriority getPriority() {
+        return ServicePriority.RESOURCES;
     }
 }

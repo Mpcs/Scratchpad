@@ -34,7 +34,7 @@ public class ConfigAnnotationProcessor extends AbstractProcessor {
 
         for (TypeElement ann : annotations) {
             for (Element element : roundEnv.getElementsAnnotatedWith(ann)) {
-                System.out.println(element.getEnclosingElement().toString() + " |:| " + element);
+                //System.out.println(element.getEnclosingElement().toString() + " |:| " + element);
                 element.getModifiers().contains(Modifier.FINAL);
                 arrayContent.append("\"")
                         .append(element)
